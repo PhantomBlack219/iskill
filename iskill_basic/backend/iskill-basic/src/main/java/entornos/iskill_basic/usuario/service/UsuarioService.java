@@ -1,0 +1,44 @@
+package entornos.iskill_basic.usuario.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import entornos.iskill_basic.usuario.model.Usuario;
+import entornos.iskill_basic.usuario.repository.UsuarioRepository;
+
+@Service
+@Transactional
+public class UsuarioService implements IUsuarioService {
+    @Autowired
+    UsuarioRepository usuarioRepository;
+
+    @Override
+    public List<Usuario> getAll() {
+        return usuarioRepository.findAll();
+    }
+
+    @Override
+    public Usuario create(Usuario usuario) {
+        return usuarioRepository.save(usuario);
+    }
+
+    @Override
+    public Usuario update(Usuario usuario) {
+        return usuarioRepository.save(usuario);
+    }
+
+    @Override
+    public Optional<Usuario> findById(Long id) {
+        return usuarioRepository.findById(id);
+    }
+
+    @Override
+    public void delete(Long id) {
+        usuarioRepository.deleteById(id);
+        return;
+    }
+}
