@@ -13,6 +13,8 @@ import jakarta.validation.constraints.NotNull;
 public class TipoUsuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column
+    @NotNull
     private Long tipo_usuario_id;
 
     @Column

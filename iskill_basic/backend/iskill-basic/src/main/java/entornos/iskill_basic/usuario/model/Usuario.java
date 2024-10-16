@@ -1,6 +1,12 @@
 package entornos.iskill_basic.usuario.model;
 
 import java.sql.Date;
+import java.util.Collection;
+import java.util.List;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,36 +20,39 @@ import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "usuario")
-public class Usuario {
+public class Usuario implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false)
+    @NotNull
     private Long usuario_id;
 
     @ManyToOne
-    @JoinColumn(name = "tipo_usuario_id")
+    @JoinColumn(nullable = false, name = "tipo_usuario_id")
     @NotNull
     private TipoUsuario tipo_usuario_id;
 
-    @Column
+    @Column(nullable = false)
     @NotNull
     private String nombre;
 
     @Column
     private String apellido;
 
-    @Column
+    @Column(nullable = false)
     @NotNull
     private String email;
 
-    @Column
+    @Column(nullable = false, unique = true)
     @NotNull
     private String usuario;
 
-    @Column
+    @Column(nullable = false)
     @NotNull
     private String password;
 
+    @CreationTimestamp
     @Column
     private Date fecha_registro;
 
@@ -58,8 +67,8 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(Long usuario_id, @NotNull TipoUsuario tipo_usuario_id, @NotNull String nombre, String apellido,
-            @NotNull String email, @NotNull String usuario, @NotNull String password, Date fecha_registro,
+    public Usuario(Long usuario_id, TipoUsuario tipo_usuario_id, String nombre, String apellido,
+            String email, String usuario, String password, Date fecha_registro,
             String logros, String objetivos_carrera) {
         this.usuario_id = usuario_id;
         this.tipo_usuario_id = tipo_usuario_id;
@@ -153,6 +162,38 @@ public class Usuario {
 
     public void setObjetivos_carrera(String objetivos_carrera) {
         this.objetivos_carrera = objetivos_carrera;
+    }
+
+    // JWT Methods
+    
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
+    }
+
+    @Override
+    public String getUsername() {
+        return usuario;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 
     @Override

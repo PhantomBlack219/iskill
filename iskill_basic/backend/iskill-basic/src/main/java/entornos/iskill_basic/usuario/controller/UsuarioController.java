@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import entornos.iskill_basic.usuario.model.Usuario;
 import entornos.iskill_basic.usuario.service.UsuarioService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
 @RestController
 @RequestMapping("/api/usuario")
@@ -28,6 +29,7 @@ public class UsuarioController {
      * @return lista de usuarios
      */
     @GetMapping("/list")
+    @SecurityRequirement(name = "bearerAuth")
     public List<Usuario> getUsuarios() {
         return usuarioService.getAll();
     }
@@ -39,6 +41,7 @@ public class UsuarioController {
      * @return usuario
      */
     @GetMapping("/{id}")
+    @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<Usuario> findById(@PathVariable Long id) {
         return usuarioService.findById(id)
             .map(ResponseEntity::ok)
@@ -52,6 +55,7 @@ public class UsuarioController {
      * @return usuario creado
      */
     @PostMapping
+    @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<Usuario> newUsuario(@RequestBody Usuario usuario) {
         return ResponseEntity.ok(usuarioService.create(usuario));
     }
@@ -63,6 +67,7 @@ public class UsuarioController {
      * @return usuario actualizado
      */
     @PutMapping
+    @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<Usuario> updateUsuario(@RequestBody Usuario usuario) {
         return usuarioService.findById(usuario.getUsuario_id())
             .map(u -> ResponseEntity.ok(usuarioService.update(usuario)))
@@ -76,6 +81,7 @@ public class UsuarioController {
      * @return respuesta de eliminación
      */
     @DeleteMapping("/{id}")
+    @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<?> deleteUsuario(@PathVariable Long id) {
         return usuarioService.findById(id)
             .map(u -> {

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import entornos.iskill_basic.usuario.service.TipoUsuarioService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import entornos.iskill_basic.usuario.model.TipoUsuario;
 
 @RestController
@@ -28,6 +29,7 @@ public class TipoUsuarioController {
      * @return lista de tipos de usuario
      */
     @GetMapping("/list")
+    @SecurityRequirement(name = "bearerAuth")
     public List<TipoUsuario> getTipoUsuarios() {
         return tipoUsuarioService.getAll();
     }
@@ -39,6 +41,7 @@ public class TipoUsuarioController {
      * @return tipo de usuario
      */
     @GetMapping("/{id}")
+    @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<TipoUsuario> findById(@PathVariable Long id) {
         return tipoUsuarioService.findById(id)
             .map(ResponseEntity::ok)
@@ -52,6 +55,7 @@ public class TipoUsuarioController {
      * @return tipo de usuario creado
      */
     @PostMapping
+    @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<TipoUsuario> newTipoUsuario(@RequestBody TipoUsuario tipoUsuario) {
         return ResponseEntity.ok(tipoUsuarioService.create(tipoUsuario));
     }
@@ -63,6 +67,7 @@ public class TipoUsuarioController {
      * @return tipo de usuario actualizado
      */
     @PutMapping
+    @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<TipoUsuario> updateTipoUsuario(@RequestBody TipoUsuario tipoUsuario) {
         return tipoUsuarioService.findById(tipoUsuario.getTipo_usuario_id())
             .map(tu -> ResponseEntity.ok(tipoUsuarioService.update(tipoUsuario)))
@@ -76,6 +81,7 @@ public class TipoUsuarioController {
      * @return tipo de usuario eliminado
      */
     @DeleteMapping("/{id}")
+    @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<?> deleteTipoUsuario(@PathVariable Long id) {
         return tipoUsuarioService.findById(id)
             .map(tu -> {
