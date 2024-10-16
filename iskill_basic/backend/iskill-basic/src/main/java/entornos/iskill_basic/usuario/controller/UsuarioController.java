@@ -64,7 +64,7 @@ public class UsuarioController {
      */
     @PutMapping
     public ResponseEntity<Usuario> updateUsuario(@RequestBody Usuario usuario) {
-        return usuarioService.findById(usuario.getId())
+        return usuarioService.findById(usuario.getUsuario_id())
             .map(u -> ResponseEntity.ok(usuarioService.update(usuario)))
             .orElseGet(() -> ResponseEntity.notFound().build());
     }
