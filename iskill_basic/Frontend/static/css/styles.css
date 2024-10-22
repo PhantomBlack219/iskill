@@ -1,0 +1,61 @@
+body {
+    font-family: 'Nunito', sans-serif;
+    text-align: center;
+}
+
+.top-text {
+    font-size: 32px;
+    font-weight: bold;
+    color: black;
+    margin-top: 20px;
+}
+
+.sub-text {
+    font-size: 20px;
+    margin-top: 1%;
+}
+
+.section-text {
+    font-size: 24px;
+    margin-top: 5%;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3%;
+}
+
+.btn-custom {
+    width: 439px;
+    height: 180px;
+    font-size: 24px;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-leader {
+    background-color: #00667F; /* Blue color */
+    margin-left: 10%;
+    border-radius: 5%;
+}
+
+.btn-collaborator {
+    background-color: #5CA9BB; /* Light blue color */
+    margin-right: 10%;
+    border-radius: 5%;
+}
+
+.btn-icon {
+    width: 100px;
+    height: 100px;
+    margin-right: 5px;
+}
+
+.btn-custom span {
+    display: flex;
+    align-items: center;
+}
