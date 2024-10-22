@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sidebar & Navbar Layout</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts - Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../static/css/proyect_styles.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Sidebar Navbar -->
+    <div class="sidebar">
+        <img src="../static/images/logo.png" alt="Logo" class="sidebar-logo">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <img src="../static/images/dashboard.png" alt="Dashboard Icon" class="nav-icon" width="30" height= "30"> Dashboard
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <img src="../static/images/misProyectos.png" alt="Challenges Icon" class="nav-icon" width="30" height= "30"> Mis desafios
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <img src="../static/images/configuracion.png" alt="Settings Icon" class="nav-icon" width="30" height= "30"> Configuración
+                </a>
+            </li>
+        </ul>
+        <div class="sidebar-footer">
+            <p>iSkill the talent Bridge</p>
+            <p>@ 204 All Rights Reserved</p>
+        </div>
+    </div>
+
+    <!-- Horizontal Navbar -->
+    <div class="horizontal-navbar">
+        <input type="text" placeholder="Search..." class="search-bar">
+        <div class="nav-icons">
+            <a href="#"><img src="../static/images/notificaciones.png" alt="Link 1" class="top-nav-icon" width="30" height= "30" ></a>
+            <a href="#"><img src="../static/images/mensajes.png" alt="Link 2" class="top-nav-icon" width="30" height= "30"></a>
+        </div>
+        <div class="right-content">
+            <div class="user-info">
+                <p>Hello, Name</p>
+                <p>CTO</p>
+            </div>
+            <img src="../static/images/perfil.png" alt="Profile" class="profile-img">
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (Optional, if you need any Bootstrap JS functionality) -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+</body>
+</html>
