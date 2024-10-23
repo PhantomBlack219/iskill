@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barra Lateral y Navbar</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts - Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../static/css/proyect_styles.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Sidebar Navbar -->
+    <div class="sidebar">
+        <img src="../static/images/logo.png" alt="Logo" class="sidebar-logo">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <img src="../static/images/dashboard.png" alt="Icono Dashboard" class="nav-icon" width="30" height="30"> Dashboard
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <img src="../static/images/misProyectos.png" alt="Icono Desafíos" class="nav-icon" width="30" height="30"> Mis Desafíos
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <img src="../static/images/configuracion.png" alt="Icono Configuración" class="nav-icon" width="30" height="30"> Configuración
+                </a>
+            </li>
+        </ul>
+        <div class="sidebar-footer">
+            <p>iSkill the talent Bridge</p>
+            <p>© 2024 All Rights Reserved</p>
+        </div>
+    </div>
+
+    <!-- Horizontal Navbar -->
+    <div class="horizontal-navbar">
+        <input type="text" placeholder="Buscar..." class="search-bar">
+        <div class="nav-icons">
+            <a href="#"><img src="../static/images/notificaciones.png" alt="Notificaciones" class="top-nav-icon" width="30" height="30"></a>
+            <a href="#"><img src="../static/images/mensajes.png" alt="Mensajes" class="top-nav-icon" width="30" height="30"></a>
+        </div>
+        <div class="right-content">
+            <div class="user-info">
+                <p>Hola, Nombre</p>
+                <p>CTO</p>
+            </div>
+            <img src="../static/images/perfil.png" alt="Perfil" class="profile-img">
+        </div>
+    </div>
+
+    <!-- Content Below the Navbar -->
+    <div class="main-content">
+        <div class="content-section"> 
+            <div class="gap-div">    
+                <p class="bold-title">Mis Desafíos</p>
+                    <div class = "gap-div-2">
+                        <a href="#">
+                            <img src="../static/images/crear.png" alt="Icono Crear" class="create-icon">
+                        </a>
+                        
+                        <div><p class="bold-title">Crear Desafíos</p></div>
+                    </div>
+            </div>
+            
+            
+            <!-- Card Section -->
+            <div class="card custom-card">
+                <div class="card-body">
+                    <div class="card-top">
+                        <div class="card-title-section">
+                            <p class="card-title">Plataforma E-Learning Interactiva</p>
+                            <p class="card-subtitle">Desarrollo de una plataforma educativa con cursos de programación interactivos</p>
+                        </div class = "status">
+                        <div class="status-badge">Buscando</div>
+                    </div>
+                    <div class="card-details">
+                        <div class="date-info">
+                            <p>Inicio de convocatoria</p>
+                            <p class="bold-text">29 de Abril, 2024</p>
+                        </div>
+                        <div class="date-info">
+                            <p>Fin de convocatoria</p>
+                            <p class="bold-text">5 de Junio, 2024</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card-extra">
+                    <div>
+                        <p>Departamento/Área de interés</p>
+                        <p class="gray-text">Tecnología y Desarrollo</p>
+                    </div>
+                </div>
+                    <div class="card-extra">
+                        <div>
+                            <p>Aplicaciones</p>
+                            <p class="bold-text">12</p>
+                        </div>
+                        <div>
+                            <p>Seleccionados</p>
+                            <p class="bold-text">2</p>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn btn-delete action-btn">Eliminar</button>
+                        <button class="btn btn-edit action-btn">Editar</button>
+                        <button class="btn btn-details action-btn">Detalles</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (Optional) -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
