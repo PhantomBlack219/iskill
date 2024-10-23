@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sidebar & Navbar Layout</title>
+    <title>Barra Lateral y Navbar</title>
     <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Google Fonts - Poppins -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Google Fonts - Poppins & Nunito -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Nunito:wght@400;600&display=swap" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="../static/css/proyect_styles.css" rel="stylesheet">
 </head>
@@ -18,45 +18,133 @@
         <ul class="nav flex-column">
             <li class="nav-item">
                 <a class="nav-link" href="#">
-                    <img src="../static/images/dashboard.png" alt="Dashboard Icon" class="nav-icon" width="30" height= "30"> Dashboard
+                    <img src="../static/images/dashboard.png" alt="Icono Dashboard" class="nav-icon" width="30" height="30"> Dashboard
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">
-                    <img src="../static/images/misProyectos.png" alt="Challenges Icon" class="nav-icon" width="30" height= "30"> Mis desafios
+                    <img src="../static/images/misProyectos.png" alt="Icono Desafíos" class="nav-icon" width="30" height="30"> Mis Desafíos
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">
-                    <img src="../static/images/configuracion.png" alt="Settings Icon" class="nav-icon" width="30" height= "30"> Configuración
+                    <img src="../static/images/configuracion.png" alt="Icono Configuración" class="nav-icon" width="30" height="30"> Configuración
                 </a>
             </li>
         </ul>
         <div class="sidebar-footer">
             <p>iSkill the talent Bridge</p>
-            <p>@ 204 All Rights Reserved</p>
+            <p>© 2024 All Rights Reserved</p>
         </div>
     </div>
 
     <!-- Horizontal Navbar -->
     <div class="horizontal-navbar">
-        <input type="text" placeholder="Search..." class="search-bar">
+        <input type="text" placeholder="Buscar..." class="search-bar">
         <div class="nav-icons">
-            <a href="#"><img src="../static/images/notificaciones.png" alt="Link 1" class="top-nav-icon" width="30" height= "30" ></a>
-            <a href="#"><img src="../static/images/mensajes.png" alt="Link 2" class="top-nav-icon" width="30" height= "30"></a>
+            <a href="#"><img src="../static/images/notificaciones.png" alt="Notificaciones" class="top-nav-icon" width="30" height="30"></a>
+            <a href="#"><img src="../static/images/mensajes.png" alt="Mensajes" class="top-nav-icon" width="30" height="30"></a>
         </div>
         <div class="right-content">
             <div class="user-info">
-                <p>Hello, Name</p>
+                <p>Hola, Nombre</p>
                 <p>CTO</p>
             </div>
-            <img src="../static/images/perfil.png" alt="Profile" class="profile-img">
+            <img src="../static/images/perfil.png" alt="Perfil" class="profile-img">
         </div>
     </div>
 
-    <!-- Bootstrap JS (Optional, if you need any Bootstrap JS functionality) -->
+    <!-- Content Below the Navbar -->
+    <div class="main-content">
+        <div class="content-section">
+            <div class="card custom-card project-form">
+                <div class="card-body">
+                    <div class="card-top">
+                        <div class="mb-3">
+                            <input type="text" class="form-control bold-placeholder full-width" id="projectName" placeholder="Nombre del Proyecto">
+                            <textarea class="form-control full-width" id="projectDescription" rows="3" placeholder="Descripción del proyecto"></textarea>
+                        </div>
+                    </div>
+            
+                    <div class="card-details">
+                        <div class="mb-3">
+                            <p class="bold-title">Detalles</p>
+                            <label for="startDate" class="form-label">Fecha de Inicio</label>
+                            <input type="date" class="form-control full-width" id="startDate">
+                        </div>
+                        <div class="mb-3">
+                            <label for="endDate" class="form-label">Fecha de Fin</label>
+                            <input type="date" class="form-control full-width" id="endDate">
+                        </div>
+                    </div>
+            
+                    <div class="card-extra">
+                        <div class="mb-3">
+                            <label for="department" class="form-label">Departamento / Área de Interés</label>
+                            <select class="form-select full-width" id="department">
+                                <option selected>Selecciona el departamento</option>
+                                <option value="1">Tecnología y Desarrollo</option>
+                                <option value="2">Marketing</option>
+                                <option value="3">Diseño</option>
+                            </select>
+                        </div>
+                    </div>
+            
+                    <div class="card-extra">
+                        <div class="mb-3">
+                            <p class="bold-title">Habilidades Requeridas</p>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="frontendHTML">
+                                <label class="form-check-label" for="frontendHTML">HTML</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="frontendCSS">
+                                <label class="form-check-label" for="frontendCSS">CSS</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="frontendJS">
+                                <label class="form-check-label" for="frontendJS">JavaScript</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="frontendReact">
+                                <label class="form-check-label" for="frontendReact">React</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="frontendAngular">
+                                <label class="form-check-label" for="frontendAngular">Angular</label>
+                            </div>
+                        </div>
+            
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="backendNode">
+                                <label class="form-check-label" for="backendNode">Node.js</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="backendPostgreSQL">
+                                <label class="form-check-label" for="backendPostgreSQL">PostgreSQL</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="backendMongoDB">
+                                <label class="form-check-label" for="backendMongoDB">MongoDB</label>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="gap-div">
+                        
+                        <button class="btn btn-delete action-btn">Cancelar Creación</button>
+                        <button class="btn btn-details action-btn">Guardar y Publicar</button>
+                    
+                    </div>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (Optional) -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-    <!-- Custom JS -->
-    <script src="script.js"></script>
 </body>
 </html>
