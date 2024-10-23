@@ -1,8 +1,11 @@
 package entornos.iskill_basic.auth.model;
 
+import entornos.iskill_basic.usuario.model.TipoUsuario;
+
 public class LoginDTO {
     private String usuario;
     private String password;
+    private TipoUsuario tipoUsuario;
 
     public String getUsuario() {
         return usuario;
@@ -18,6 +21,14 @@ public class LoginDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public TipoUsuario getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(TipoUsuario tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
     }
 
 }

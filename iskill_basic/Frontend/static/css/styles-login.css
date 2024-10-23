@@ -1,142 +1,26 @@
 body {
-    margin: 0;
     font-family: 'Nunito', sans-serif;
-    background-color: #f4f5fa;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    text-align: center;
+    background-color: #F9F9F9 !important;
 }
-
-.main-container {
-    display: flex;
-    width: 90%;
-    max-width: 1200px;
+.bg-custom {
     background-color: #ffffff;
-    border-radius: 15px;
+    border-radius: 45px;
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
 }
-
-.login-container {
-    width: 40%;
-    padding: 60px;
-    background-color: #ffffff;
-}
-
-.welcome-container {
-    width: 60%;
-    background-color: #e6f2f5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0;
-}
-
-.logo {
-    width: 100px;
-    margin-bottom: 20px;
-}
-
-.slogan {
-    color: #888;
-    margin-bottom: 30px;
-}
-
-.login-form h2 {
-    color: black;
-    font-weight: bold;
-    margin-bottom: 20px;
-    font-size: 32px;
-}
-
-.input-group {
-    margin-bottom: 20px;
-    text-align: left;
-}
-
-.input-group label {
-    display: block;
-    margin-bottom: 8px;
-    color: #333;
-    font-weight: bold;
-}
-
-.input-group input {
-    width: calc(100% - 20px);
-    padding: 15px;
-    font-size: 16px;
-    border: 1px solid #aaa;
-    border-radius: 8px;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-    transition: border-color 0.3s;
-}
-
-.input-group input:focus {
-    border-color: #00667F;
-    outline: none;
-}
-
-.btn {
-    border: none;
-    padding: 20px 30px;
-    font-size: 18px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+.btn-custom {
+    background-color: #00667F !important;
+    border: none !important;
     color: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
-
-.btn.ingresar {
-    background-color: #00667F;
-    width: 100%;
-    margin-top: 20px;
+.btn-custom:hover {
+    background-color: #005266;
+    color: #ffffff;
+    box-shadow: 0 0 15px rgba(0, 102, 127, 0.5);
 }
-
-
-.btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 15px rgba(0, 102, 127, 0.4);
-}
-
 .forgot-password {
-    margin-top: 15px;
-}
-
-.forgot-password a {
     color: #00667F;
-    text-decoration: none;
     font-weight: bold;
 }
-
-.forgot-password a:hover {
+.forgot-password:hover {
     text-decoration: underline;
 }
-
-.alternative-login {
-    margin-top: 20px;
-}
-
-.welcome-container h2 {
-    color: #888;
-    font-weight: 400;
-    margin-bottom: 10px;
-    font-size: 24px;
-}
-
-.welcome-container h1 {
-    color: #00667F;
-    font-size: 36px;
-    font-weight: bold;
-}
-
-.welcome-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-

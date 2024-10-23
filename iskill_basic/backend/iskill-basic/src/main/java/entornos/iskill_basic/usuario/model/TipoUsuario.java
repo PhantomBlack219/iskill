@@ -1,5 +1,7 @@
 package entornos.iskill_basic.usuario.model;
 
+import java.io.Serializable;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,7 +12,9 @@ import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "tipo_usuario")
-public class TipoUsuario {
+public class TipoUsuario implements Serializable {
+    private static final long serialVersionUID = 1L; // Versión para la serialización
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
