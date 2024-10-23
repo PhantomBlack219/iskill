@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../static/css/styles-register.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <title>Registro - ISkill</title>
+    <script>
+        function toggleEmployeeFields() {
+            const userType = document.getElementById('tipo-usuario').value;
+            const employeeFields = document.getElementById('employee-fields');
+            if (userType === 'empleado') {
+                employeeFields.style.display = 'block';
+            } else {
+                employeeFields.style.display = 'none';
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="logo-container" style="text-align: center; margin-bottom: 20px;">
+            <img src="../static/images/logo.png" alt="ISkill logo" class="logo" style="width: 100px;">
+        </div>
+        <div class="title">Registro de Usuario</div>
+        <div class="content">
+            <form action="#" method="POST">
+                <div class="user-details">
+                    <div class="input-box">
+                        <span class="details">Nombre</span>
+                        <input type="text" id="nombre" name="nombre" placeholder="Ingresa el nombre" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Apellido</span>
+                        <input type="text" id="apellido" name="apellido" placeholder="Ingresa el apellido" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Correo Electrónico</span>
+                        <input type="email" id="email" name="email" placeholder="name@example.com" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Nombre de Usuario</span>
+                        <input type="text" id="usuario" name="usuario" placeholder="Ingresa el nombre de usuario" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Contraseña</span>
+                        <input type="password" id="password" name="password" placeholder="Al menos 8 caracteres" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Confirmar Contraseña</span>
+                        <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirma contraseña" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Tipo de Usuario</span>
+                        <select id="tipo-usuario" name="tipo-usuario" onchange="toggleEmployeeFields()" required>
+                            <option value="" disabled selected>Seleccione una opción</option>
+                            <option value="2">Empleado</option>
+                            <option value="1">Empleador</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="employee-fields" class="user-details" style="display: none;">
+                    <div class="input-box">
+                        <span class="details">Logros</span>
+                        <textarea id="logros" name="logros" placeholder="Describe los logros"></textarea>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Objetivos de Carrera</span>
+                        <textarea id="objetivos" name="objetivos" placeholder="Describe los objetivos de carrera"></textarea>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-info" onclick="saveUsuario()">
+                    <i class="fas fa-edit"></i> Guardar
+                </button>
+            </form>
+           
+        </div>
+    </div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" 
+integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" 
+crossorigin="anonymous"></script>
+<script src="..\static\js\request.js"></script>
+<script src="..\static\js\usuarios.js"></script> 
+<script>
+    window.onload = function(){
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('idusuario') != null)
+            loadUsuario(urlParams.get('idusuario'))
+    }
+</script>
+</html>
+
