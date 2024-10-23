@@ -35,10 +35,6 @@ public class Vacante {
 
     @Column
     @NotNull
-    private String habilidades_requeridas;
-
-    @Column
-    @NotNull
     private int puestos_disponibles;
 
     @Column
@@ -62,13 +58,12 @@ public class Vacante {
 
 
     public Vacante(Long vacante_id, @NotNull Proyecto proyecto_id, @NotNull String nombre_vacante,
-            @NotNull String descripcion, @NotNull String habilidades_requeridas, @NotNull int puestos_disponibles,
+            @NotNull String descripcion, @NotNull int puestos_disponibles,
             @NotNull int puntos, EstadoVacante estado, Date fecha_inicio_vacante, Date fecha_fin_vacante) {
         this.vacante_id = vacante_id;
         this.proyecto_id = proyecto_id;
         this.nombre_vacante = nombre_vacante;
         this.descripcion = descripcion;
-        this.habilidades_requeridas = habilidades_requeridas;
         this.puestos_disponibles = puestos_disponibles;
         this.puntos = puntos;
         this.estado = estado;
@@ -115,17 +110,6 @@ public class Vacante {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-
-
-    public String getHabilidades_requeridas() {
-        return habilidades_requeridas;
-    }
-
-
-    public void setHabilidades_requeridas(String habilidades_requeridas) {
-        this.habilidades_requeridas = habilidades_requeridas;
-    }
-
 
     public int getPuestos_disponibles() {
         return puestos_disponibles;

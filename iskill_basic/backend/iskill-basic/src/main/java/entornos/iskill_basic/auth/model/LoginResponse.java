@@ -5,6 +5,7 @@ import entornos.iskill_basic.usuario.model.TipoUsuario;
 public class LoginResponse {
     private String token;
     private long expiresIn;
+    private Long usuarioId;
     private TipoUsuario tipoUsuario;
 
     public String getToken() {
@@ -21,6 +22,14 @@ public class LoginResponse {
 
     public void setExpiresIn(long expiresIn) {
         this.expiresIn = expiresIn;
+    }
+
+    public Long getUsuarioId() {
+        return usuarioId;
+    }
+
+    public void setUsuarioId(Long usuarioId) {
+        this.usuarioId = usuarioId;
     }
 
     public TipoUsuario getTipoUsuario() {

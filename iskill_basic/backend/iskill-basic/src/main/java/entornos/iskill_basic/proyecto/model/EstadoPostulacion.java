@@ -1,8 +1,8 @@
 package entornos.iskill_basic.proyecto.model;
 
 public enum EstadoPostulacion {
-    ACTIVO("Activo"),
-    INACTIVO("Inactivo");
+    APLICADO("Aplicado"),
+    SELECCIONADO("Seleccionado");
 
     private final String displayName;
 

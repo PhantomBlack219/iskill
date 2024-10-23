@@ -5,7 +5,7 @@ import entornos.iskill_basic.usuario.model.TipoUsuario;
 public class LoginDTO {
     private String usuario;
     private String password;
-    private Long id_usuario;
+    private Long idUsuario;
     private TipoUsuario tipoUsuario;
 
     public String getUsuario() {
@@ -24,12 +24,12 @@ public class LoginDTO {
         this.password = password;
     }
 
-    public Long getId_usuario() {
-        return id_usuario;
+    public Long getidUsuario() {
+        return idUsuario;
     }
 
-    public void setId_usuario(Long id_usuario) {
-        this.id_usuario = id_usuario;
+    public void setidUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public TipoUsuario getTipoUsuario() {

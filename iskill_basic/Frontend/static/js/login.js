@@ -27,12 +27,15 @@ document.getElementById('login-form').addEventListener('submit', async function(
 
             localStorage.setItem('jwtToken', data.token);
             localStorage.setItem('tipoUsuario', data.tipoUsuario.nombre);
+            localStorage.setItem('usuarioId', data.usuarioId);
 
            // Redirect based on tipoUsuario
             if(data.tipoUsuario.nombre == "Administrador") {
                 window.location.href = './create_project.html';
+            } else if(data.tipoUsuario.nombre == "Empleador") {
+                window.location.href = './empleador_project_list.html';
             } else {
-                window.location.href = './index.html';
+
             }
         } else {
             showAlert('Usuario o contraseña incorrectos. Por favor, inténtelo de nuevo.', 'danger');
