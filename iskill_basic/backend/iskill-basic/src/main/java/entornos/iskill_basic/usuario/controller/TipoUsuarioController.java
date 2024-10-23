@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import entornos.iskill_basic.usuario.model.TipoUsuario;
 import entornos.iskill_basic.usuario.service.TipoUsuarioService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-import entornos.iskill_basic.usuario.model.TipoUsuario;
 
 @RestController
 @RequestMapping("/api/tipo_usuario")
@@ -29,7 +29,6 @@ public class TipoUsuarioController {
      * @return lista de tipos de usuario
      */
     @GetMapping("/list")
-    @SecurityRequirement(name = "bearerAuth")
     public List<TipoUsuario> getTipoUsuarios() {
         return tipoUsuarioService.getAll();
     }
@@ -41,7 +40,6 @@ public class TipoUsuarioController {
      * @return tipo de usuario
      */
     @GetMapping("/{id}")
-    @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<TipoUsuario> findById(@PathVariable Long id) {
         return tipoUsuarioService.findById(id)
             .map(ResponseEntity::ok)

@@ -8,17 +8,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <title>Registro - ISkill</title>
-    <script>
-        function toggleEmployeeFields() {
-            const userType = document.getElementById('tipo-usuario').value;
-            const employeeFields = document.getElementById('employee-fields');
-            if (userType === 'empleado') {
-                employeeFields.style.display = 'block';
-            } else {
-                employeeFields.style.display = 'none';
-            }
-        }
-    </script>
 </head>
 <body>
     <div class="container">
@@ -27,7 +16,7 @@
         </div>
         <div class="title">Registro de Usuario</div>
         <div class="content">
-            <form action="#" method="POST">
+            <form id="registration-form" action="#" method="POST">
                 <div class="user-details">
                     <div class="input-box">
                         <span class="details">Nombre</span>
@@ -57,8 +46,6 @@
                         <span class="details">Tipo de Usuario</span>
                         <select id="tipo-usuario" name="tipo-usuario" onchange="toggleEmployeeFields()" required>
                             <option value="" disabled selected>Seleccione una opción</option>
-                            <option value="empleado">Empleado</option>
-                            <option value="empleador">Empleador</option>
                         </select>
                     </div>
                 </div>
@@ -79,6 +66,8 @@
             <p class="login">¿Ya tienes una cuenta? <a href="login.html">Iniciar sesión</a></p>
         </div>
     </div>
+
+    <script src="../static/js/register.js"></script>
 </body>
 </html>
 

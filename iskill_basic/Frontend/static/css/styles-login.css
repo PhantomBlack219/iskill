@@ -24,3 +24,20 @@ body {
 .forgot-password:hover {
     text-decoration: underline;
 }
+
+.close-alert {
+    background: none; /* Remove background */
+    border: none; /* Remove any border */
+    color: #a41e34; /* Darker red color for the close button */
+    font-size: 1.5rem; /* Adjust font size if necessary */
+    opacity: 0.8; /* Slightly transparent for better appearance */
+    cursor: pointer; /* Change cursor to pointer */
+}
+
+.close-alert:hover {
+    opacity: 1; /* Full opacity on hover */
+}
+
+.alert {
+    position: relative; /* Required for absolute positioning of the close button */
+}

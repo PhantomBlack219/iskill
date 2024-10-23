@@ -27,6 +27,10 @@ public class UsuarioService implements IUsuarioService {
 
     @Override
     public Usuario create(Usuario usuario) {
+        if(isUsuarioExists(usuario.getUsuario())){
+            throw new IllegalArgumentException("El usuario ya existe");
+        }
+        
         String hashedPassword = passwordEncoder.encode(usuario.getPassword());
         usuario.setPassword(hashedPassword);
         return usuarioRepository.save(usuario);
@@ -45,6 +49,10 @@ public class UsuarioService implements IUsuarioService {
     @Override
     public void delete(Long id) {
         usuarioRepository.deleteById(id);
-        return;
+    }
+
+    @Override
+    public boolean isUsuarioExists(String usuario){
+        return usuarioRepository.existsByUsuario(usuario);
     }
 }

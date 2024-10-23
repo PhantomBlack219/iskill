@@ -1,5 +1,6 @@
 package entornos.iskill_basic.auth.controller;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,10 +27,14 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<Usuario> register(@RequestBody RegistrationDTO registrationDTO) {
-        Usuario registeredUsuario = authenticationService.registration(registrationDTO);
+    public ResponseEntity<?> register(@RequestBody RegistrationDTO registrationDTO) {
+        try {
+            Usuario registeredUsuario = authenticationService.registration(registrationDTO);
 
-        return ResponseEntity.ok(registeredUsuario);
+            return ResponseEntity.ok(registeredUsuario);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        }
     }
 
     @PostMapping("/login")

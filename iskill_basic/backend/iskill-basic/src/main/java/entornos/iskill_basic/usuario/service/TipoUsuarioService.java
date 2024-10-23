@@ -39,6 +39,5 @@ public class TipoUsuarioService implements ITipoUsuarioService {
     @Override
     public void delete(Long id){
         tipoUsuarioRepository.deleteById(id);
-        return;
     }
 }

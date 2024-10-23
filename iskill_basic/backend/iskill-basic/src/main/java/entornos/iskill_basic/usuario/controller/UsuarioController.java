@@ -17,6 +17,7 @@ import entornos.iskill_basic.usuario.model.Usuario;
 import entornos.iskill_basic.usuario.service.UsuarioService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
+
 @RestController
 @RequestMapping("/api/usuario")
 public class UsuarioController {
@@ -90,4 +91,17 @@ public class UsuarioController {
             })
             .orElseGet(() -> ResponseEntity.notFound().build());
     }
+
+    /**
+     * Se verifica si un usuario existe
+     * 
+     * @param usuario usuario a verificar
+     * @return respuesta de verificación
+     */
+    @GetMapping("/check_usuario/{usuario}")
+    public ResponseEntity<Boolean> checkUsuario(@PathVariable String usuario) {
+        boolean exists = usuarioService.isUsuarioExists(usuario);
+        return ResponseEntity.ok(!exists); // Return true if Usuario is available
+    }
+    
 }
