@@ -2,15 +2,18 @@ body {
     font-family: 'Poppins', sans-serif;
     background-color: #F9F9F9;
     display: flex;
+    flex-direction: column;
+    margin: 0;
 }
 
-/* Sidebar Styling */
 .sidebar {
-    width: 250px;
+    width: 200px;
     height: 100vh;
     background-color: #F9F9F9;
     padding: 20px;
     position: fixed;
+    left: 0;
+    top: 0;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -22,75 +25,40 @@ body {
     margin: 0 auto;
 }
 
-.nav {
-    margin-top: 5%;
-}
-
 .nav-link {
-    font-size: 18px;
+    font-size: 17px;
     color: #000;
     padding: 10px;
     display: flex;
     align-items: center;
     text-decoration: none;
-    font-weight: 400;
 }
 
-.nav-link i {
+.nav-icon {
+    width: 30px;
+    height: 30px;
     margin-right: 10px;
-}
-
-.nav-link:hover {
-    background-color: #EFEFEF;
-    border-radius: 5px;
 }
 
 .sidebar-footer {
     margin-top: 20%;
-    font-size: 14px;
+    font-size: 13px;
     color: #969BA0;
     text-align: center;
     font-weight: 600;
 }
 
-/* Horizontal Navbar Styling */
 .horizontal-navbar {
-    width: calc(100% - 361px);
+    width: 68%;
     background-color: #F9F9F9;
     padding: 15px 30px;
-    margin-left: 361px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: relative;
-}
-
-.nav-icons a {
-    margin-right: 20px;
-    color: #000;
-    text-decoration: none;
-    font-size: 20px;
-}
-
-.right-content {
-    display: flex;
-    align-items: center;
-}
-
-.user-info {
-    text-align: right;
-    margin-right: 15px;
-}
-
-.user-info p {
-    margin: 0;
-}
-
-.profile-img {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    margin-right: 15px;
+    margin-left: 361px;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
 }
 
 .search-bar {
@@ -101,6 +69,160 @@ body {
     width: 200px;
 }
 
-.search-bar:focus {
-    outline: none;
+.right-content {
+    display: flex;
+    align-items: center;
+}
+
+.profile-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-left: 15px;
+}
+
+.main-content {
+    margin-top: 100px;
+    margin-left: 361px;
+    padding-right: 250px;
+    padding-bottom: 50px;
+}
+
+.gap-div{
+    display: flex;
+    gap: 50%;
+}
+
+.gap-div-2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10%
+}
+
+.content-section {
+    padding-top: 20px;
+}
+
+.bold-title {
+    font-weight: bold;
+    white-space: nowrap;
+    font-size: 23px; /* Adjusted size */
+}
+
+.create-icon {
+    width: 30px;
+    height: 30px;
+}
+
+
+
+.custom-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.card-top {
+    display: flex;
+    gap: 5%;
+    align-items: flex-start;
+}
+
+.card-title {
+    font-size: 19px;
+    font-weight: bold;
+}
+
+.card-subtitle {
+    font-size: 14px; /* Adjusted size */
+    color: #888888; /* Gray color */
+}
+
+.gray-text {
+    font-size: 13px; /* Adjusted size */
+    color: #888888; /* Gray color */
+}
+
+.status-badge {
+    background-color: #B4C0FF;
+    border-radius: 8px;
+    padding: 5px 10px;
+    font-size: 14px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.card-details {
+    display: flex;
+    gap: 4%; 
+    margin-top: 20px;
+}
+
+
+.date-info {
+    text-align: left;
+}
+
+.bold-text {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.card-extra {
+    display: flex;
+    gap: 25%;
+    margin-top: 20px;
+}
+
+.card-actions {
+    display: flex;
+    gap: 29%;
+    margin-top: 20px;
+}
+
+.action-btn {
+    width: 100px; /* Adjusted width for uniformity */
+    padding: 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+.btn-delete {
+    background-color: #B66464; /* Delete button color */
+}
+
+.btn-edit {
+    background-color: #3A96AD; /* Edit button color */
+}
+
+.btn-details {
+    background-color: #014558; /* Details button color */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 250px; /* Adjust sidebar for smaller screens */
+    }
+
+    .horizontal-navbar {
+        margin-left: 250px; /* Adjust navbar for smaller screens */
+    }
+
+    .main-content {
+        margin-left: 250px; /* Adjust main content for smaller screens */
+    }
+}
+
+ul {
+    list-style-type: none; /* Esto quita los puntos */
 }
