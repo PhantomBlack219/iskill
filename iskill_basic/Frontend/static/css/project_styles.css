@@ -1,6 +1,6 @@
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #F9F9F9;
+    background-color: #f4f5fa;
     display: flex;
     flex-direction: column;
     margin: 0;
@@ -9,7 +9,7 @@ body {
 .sidebar {
     width: 200px;
     height: 100vh;
-    background-color: #F9F9F9;
+    background-color: #f4f5fa;
     padding: 20px;
     position: fixed;
     left: 0;
@@ -50,7 +50,7 @@ body {
 
 .horizontal-navbar {
     width: 68%;
-    background-color: #F9F9F9;
+    background-color: #f4f5fa;
     padding: 15px 30px;
     display: flex;
     justify-content: space-between;

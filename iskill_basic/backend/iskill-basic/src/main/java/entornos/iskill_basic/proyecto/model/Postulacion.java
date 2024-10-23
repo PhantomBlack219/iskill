@@ -34,7 +34,7 @@ public class Postulacion {
 
     @Column
     @NotNull
-    private Estado estado;
+    private EstadoPostulacion estado;
 
     @Column
     @NotNull
@@ -44,7 +44,7 @@ public class Postulacion {
     }
 
     public Postulacion(Long postulacion_id, @NotNull Usuario usuario_id, @NotNull Vacante vacante_id,
-            @NotNull Estado estado, @NotNull Date fecha_postulacion) {
+            @NotNull EstadoPostulacion estado, @NotNull Date fecha_postulacion) {
         this.postulacion_id = postulacion_id;
         this.usuario_id = usuario_id;
         this.vacante_id = vacante_id;
@@ -76,11 +76,11 @@ public class Postulacion {
         this.vacante_id = vacante_id;
     }
 
-    public Estado getEstado() {
+    public EstadoPostulacion getEstado() {
         return estado;
     }
 
-    public void setEstado(Estado estado) {
+    public void setEstado(EstadoPostulacion estado) {
         this.estado = estado;
     }
 
