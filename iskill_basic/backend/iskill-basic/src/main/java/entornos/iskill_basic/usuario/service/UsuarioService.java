@@ -53,6 +53,6 @@ public class UsuarioService implements IUsuarioService {
 
     @Override
     public boolean isUsuarioExists(String usuario){
-        return usuarioRepository.existsByUsuario(usuario);
+        return usuarioRepository.findByUsuario(usuario).isPresent();
     }
 }

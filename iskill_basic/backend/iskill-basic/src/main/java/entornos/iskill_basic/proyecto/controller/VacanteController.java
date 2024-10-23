@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import entornos.iskill_basic.proyecto.model.EstadoVacante;
 import entornos.iskill_basic.proyecto.model.Vacante;
 import entornos.iskill_basic.proyecto.service.VacanteService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -24,9 +25,9 @@ public class VacanteController {
     VacanteService VacanteService;
 
     /**
-     * Se obtiene la lista de tipos de usuario
+     * Se obtiene la lista de vacantes
      * 
-     * @return lista de tipos de usuario
+     * @return lista de vacantes
      */
     @GetMapping("/list")
     @SecurityRequirement(name = "bearerAuth")
@@ -35,10 +36,10 @@ public class VacanteController {
     }
 
     /**
-     * Se obtiene un tipo de usuario por su id
+     * Se obtiene un vacante por su id
      * 
-     * @param id id del tipo de usuario
-     * @return tipo de usuario
+     * @param id id del vacante
+     * @return vacante
      */
     @GetMapping("/{id}")
     @SecurityRequirement(name = "bearerAuth")
@@ -49,10 +50,10 @@ public class VacanteController {
     }
 
     /**
-     * Se crea un nuevo tipo de usuario
+     * Se crea un nuevo vacante
      * 
-     * @param Vacante tipo de usuario a crear
-     * @return tipo de usuario creado
+     * @param Vacante vacante a crear
+     * @return vacante creado
      */
     @PostMapping
     @SecurityRequirement(name = "bearerAuth")
@@ -61,10 +62,10 @@ public class VacanteController {
     }
 
     /**
-     * Se actualiza un tipo de usuario
+     * Se actualiza un vacante
      * 
-     * @param Vacante tipo de usuario a actualizar
-     * @return tipo de usuario actualizado
+     * @param Vacante vacante a actualizar
+     * @return vacante actualizado
      */
     @PutMapping
     @SecurityRequirement(name = "bearerAuth")
@@ -75,10 +76,10 @@ public class VacanteController {
     }
 
     /**
-     * Se elimina un tipo de usuario
+     * Se elimina un vacante
      * 
-     * @param id id del tipo de usuario a eliminar
-     * @return tipo de usuario eliminado
+     * @param id id del vacante a eliminar
+     * @return vacante eliminado
      */
     @DeleteMapping("/{id}")
     @SecurityRequirement(name = "bearerAuth")
@@ -89,5 +90,35 @@ public class VacanteController {
                 return ResponseEntity.ok().build();
             })
             .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    /**
+     * Devuelve la cantidad de registros de un proyecto según el estado
+     * 
+     * @param estado estado de la vacante
+     * @param vacanteId id de la vacante
+     * 
+     * @return cantidad de registros
+     */
+    @GetMapping("/count/estado/{estado}/vacante/{id}")
+    @SecurityRequirement(name = "bearerAuth")
+    public ResponseEntity<Long> getVacantesCountByEstadoAndVacanteId(@PathVariable EstadoVacante estado, @PathVariable Long id){
+        Long count = VacanteService.countVacantesByEstadoAndVacanteId(estado, id);
+        return ResponseEntity.ok(count);
+    }
+
+    /**
+     * Devuelve la cantidad de registros de un proyecto según el estado
+     * 
+     * @param estado estado de la vacante
+     * @param vacanteId id de la vacante
+     * 
+     * @return cantidad de registros
+     */
+    @GetMapping("/count/vacante/{id}")
+    @SecurityRequirement(name = "bearerAuth")
+    public ResponseEntity<Long> getVacantesCountByVacanteId(@PathVariable Long id){
+        Long count = VacanteService.countVacantesByVacanteId(id);
+        return ResponseEntity.ok(count);
     }
 }

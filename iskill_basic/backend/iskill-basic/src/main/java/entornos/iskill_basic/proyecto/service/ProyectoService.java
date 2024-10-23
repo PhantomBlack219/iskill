@@ -41,4 +41,9 @@ public class ProyectoService implements IProyectoService {
         ProyectoRepository.deleteById(id);
         return;
     }
+
+    @Override
+    public List<Proyecto> getProyectosByUsuarioId(Long id) {
+        return ProyectoRepository.getProyectosByUsuarioId(id);
+    }
 }

@@ -42,4 +42,9 @@ public class HabilidadVacanteService implements IHabilidadVacanteService {
         habilidadVacanteRepository.deleteById(id);
     }
 
+    @Override
+    public List<HabilidadVacante> createHabilidadesVacante(List<HabilidadVacante> habilidadesVacante){
+        return habilidadVacanteRepository.saveAll(habilidadesVacante);
+    }
+
 }

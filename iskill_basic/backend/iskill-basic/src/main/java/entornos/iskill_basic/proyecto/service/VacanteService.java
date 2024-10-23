@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import entornos.iskill_basic.proyecto.model.EstadoVacante;
 import entornos.iskill_basic.proyecto.model.Vacante;
 import entornos.iskill_basic.proyecto.repository.VacanteRepository;
 
@@ -40,5 +41,15 @@ public class VacanteService implements IVacanteService {
     public void delete(Long id){
         VacanteRepository.deleteById(id);
         return;
+    }
+
+    @Override
+    public Long countVacantesByEstadoAndVacanteId(EstadoVacante estado, Long id){
+        return VacanteRepository.countVacantesByEstadoAndVacanteId(estado, id);
+    }
+
+    @Override
+    public Long countVacantesByVacanteId(Long id){
+        return VacanteRepository.countVacantesByVacanteId(id);
     }
 }

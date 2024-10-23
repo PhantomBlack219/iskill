@@ -15,4 +15,6 @@ public interface IProyectoService {
     Optional<Proyecto> findById(Long id);
 
     void delete(Long id);
+
+    List<Proyecto> getProyectosByUsuarioId(Long id);
 }

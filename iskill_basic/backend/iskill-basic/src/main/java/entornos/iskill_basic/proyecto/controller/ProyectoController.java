@@ -17,6 +17,7 @@ import entornos.iskill_basic.proyecto.service.ProyectoService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import entornos.iskill_basic.proyecto.model.Proyecto;
 
+
 @RestController
 @RequestMapping("/api/proyecto")
 public class ProyectoController {
@@ -90,4 +91,11 @@ public class ProyectoController {
             })
             .orElseGet(() -> ResponseEntity.notFound().build());
     }
+
+    @GetMapping("/usuario_id/{id}")
+    @SecurityRequirement(name = "bearerAuth")
+    public List<Proyecto> getProyectosByUsuarioId(@PathVariable Long id) {
+        return ProyectoService.getProyectosByUsuarioId(id);
+    }
+    
 }

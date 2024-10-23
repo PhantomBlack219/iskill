@@ -14,6 +14,8 @@ import entornos.iskill_basic.auth.service.AuthenticationService;
 import entornos.iskill_basic.auth.service.JwtService;
 import entornos.iskill_basic.usuario.model.Usuario;
 
+import java.util.Map;
+
 @RequestMapping("/auth")
 @RestController
 public class AuthController {
@@ -31,9 +33,9 @@ public class AuthController {
         try {
             Usuario registeredUsuario = authenticationService.registration(registrationDTO);
 
-            return ResponseEntity.ok(registeredUsuario);
+            return ResponseEntity.ok(Map.of("message", "Usuario registrado exitosamente", "usuario", registeredUsuario));
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(Map.of("error", e.getMessage()));
         }
     }
 
@@ -47,7 +49,7 @@ public class AuthController {
         loginResponse.setToken(jwtToken);
         loginResponse.setExpiresIn(jwtService.getExpirationTime());
         loginResponse.setTipoUsuario(authenticatedUsuario.getTipo_usuario_id());
-        loginResponse.setUsuarioId(authenticatedUsuario.getUsuario_id());
+        loginResponse.setUsuario(authenticatedUsuario);
 
         return ResponseEntity.ok(loginResponse);
     }

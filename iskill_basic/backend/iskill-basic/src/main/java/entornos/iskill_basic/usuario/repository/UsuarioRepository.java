@@ -11,6 +11,4 @@ import entornos.iskill_basic.usuario.model.Usuario;
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     @Query("SELECT usr FROM Usuario AS usr WHERE usr.usuario = :usuario")
     Optional<Usuario> findByUsuario(@Param("usuario") String usuario);
-
-    boolean existsByUsuario(String usuario);
 }

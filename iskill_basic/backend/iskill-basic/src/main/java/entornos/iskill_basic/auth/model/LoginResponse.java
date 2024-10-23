@@ -1,11 +1,12 @@
 package entornos.iskill_basic.auth.model;
 
 import entornos.iskill_basic.usuario.model.TipoUsuario;
+import entornos.iskill_basic.usuario.model.Usuario;
 
 public class LoginResponse {
     private String token;
     private long expiresIn;
-    private Long usuarioId;
+    private Usuario usuario;
     private TipoUsuario tipoUsuario;
 
     public String getToken() {
@@ -24,12 +25,12 @@ public class LoginResponse {
         this.expiresIn = expiresIn;
     }
 
-    public Long getUsuarioId() {
-        return usuarioId;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setUsuarioId(Long usuarioId) {
-        this.usuarioId = usuarioId;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public TipoUsuario getTipoUsuario() {

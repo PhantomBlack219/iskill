@@ -4,6 +4,8 @@ import java.sql.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -27,7 +29,7 @@ public class Vacante {
 
     @Column
     @NotNull
-    private String nombre_vacante;
+    private String nombre;
 
     @Column
     @NotNull
@@ -42,13 +44,14 @@ public class Vacante {
     private int puntos;
 
     @Column
+    @Enumerated(EnumType.STRING)
     private EstadoVacante estado;
 
     @Column
-    private Date fecha_inicio_vacante;
+    private Date fecha_inicio;
 
     @Column
-    private Date fecha_fin_vacante;
+    private Date fecha_fin;
 
 
     // Constructors
@@ -57,18 +60,18 @@ public class Vacante {
     }
 
 
-    public Vacante(Long vacante_id, @NotNull Proyecto proyecto_id, @NotNull String nombre_vacante,
+    public Vacante(Long vacante_id, @NotNull Proyecto proyecto_id, @NotNull String nombre,
             @NotNull String descripcion, @NotNull int puestos_disponibles,
-            @NotNull int puntos, EstadoVacante estado, Date fecha_inicio_vacante, Date fecha_fin_vacante) {
+            @NotNull int puntos, EstadoVacante estado, Date fecha_inicio, Date fecha_fin) {
         this.vacante_id = vacante_id;
         this.proyecto_id = proyecto_id;
-        this.nombre_vacante = nombre_vacante;
+        this.nombre = nombre;
         this.descripcion = descripcion;
         this.puestos_disponibles = puestos_disponibles;
         this.puntos = puntos;
         this.estado = estado;
-        this.fecha_inicio_vacante = fecha_inicio_vacante;
-        this.fecha_fin_vacante = fecha_fin_vacante;
+        this.fecha_inicio = fecha_inicio;
+        this.fecha_fin = fecha_fin;
     }
 
 
@@ -92,13 +95,13 @@ public class Vacante {
     }
 
 
-    public String getNombre_vacante() {
-        return nombre_vacante;
+    public String getNombre() {
+        return nombre;
     }
 
 
-    public void setNombre_vacante(String nombre_vacante) {
-        this.nombre_vacante = nombre_vacante;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
 
@@ -138,19 +141,19 @@ public class Vacante {
         this.estado = estado;
     }
 
-    public Date getFecha_inicio_vacante() {
-        return fecha_inicio_vacante;
+    public Date getFecha_inicio() {
+        return fecha_inicio;
     }
 
-    public void setFecha_inicio_vacante(Date fecha_inicio_vacante) {
-        this.fecha_inicio_vacante = fecha_inicio_vacante;
+    public void setFecha_inicio(Date fecha_inicio) {
+        this.fecha_inicio = fecha_inicio;
     }
 
-    public Date getFecha_fin_vacante() {
-        return fecha_fin_vacante;
+    public Date getFecha_fin() {
+        return fecha_fin;
     }
 
-    public void setFecha_fin_vacante(Date fecha_fin_vacante) {
-        this.fecha_fin_vacante = fecha_fin_vacante;
+    public void setFecha_fin(Date fecha_fin) {
+        this.fecha_fin = fecha_fin;
     }
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import entornos.iskill_basic.proyecto.model.EstadoPostulacion;
 import entornos.iskill_basic.proyecto.model.Postulacion;
 import entornos.iskill_basic.proyecto.service.PostulacionService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -89,5 +90,34 @@ public class PostulacionController {
                 return ResponseEntity.ok().build();
             })
             .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    /**
+     * Devuelve la cantidad de registros de un proyecto según el estado
+     * 
+     * @param estado estado de la vacante
+     * @param id id de la vacante
+     * 
+     * @return cantidad de registros
+     */
+    @GetMapping("/count/estado/{estado}/vacante/{id}")
+    @SecurityRequirement(name = "bearerAuth")
+    public ResponseEntity<Long> getVacantesCountByEstadoAndVacanteId(@PathVariable EstadoPostulacion estado, @PathVariable Long id){
+        Long count = PostulacionService.countPostulacionByEstadoAndVacanteId(estado, id);
+        return ResponseEntity.ok(count);
+    }
+
+    /**
+     * Devuelve la cantidad de registros de un proyecto según el ID
+     * 
+     * @param id id de la vacante
+     * 
+     * @return cantidad de registros
+     */
+    @GetMapping("/count/vacante/{id}")
+    @SecurityRequirement(name = "bearerAuth")
+    public ResponseEntity<Long> getVacantesCountByVacanteId(@PathVariable Long id){
+        Long count = PostulacionService.countPostulacionByVacanteId(id);
+        return ResponseEntity.ok(count);
     }
 }

@@ -1,3 +1,5 @@
+import { showAlert } from './alert.js';
+
 async function fetchTipoUsuario() {
     try {
         const response = await fetch('http://localhost:9000/api/tipo_usuario/list', {
@@ -23,7 +25,7 @@ async function fetchTipoUsuario() {
         });
     } catch (error) {
         console.error('Error:', error);
-        alert('Error al cargar los tipos de usuario.');
+        showAlert('Ocurrió un error al cargar los tipos de usuario. Por favor, inténtelo de nuevo.', 'danger');
     }
 }
 
@@ -56,6 +58,14 @@ document.getElementById('registration-form').addEventListener('submit', async fu
     };
 
     try {
+        // Make sure username doesn't exist
+        const usuarioCheck = await checkUsernameAvailability(usuario);
+        if(!usuarioCheck) {
+            showAlert('El nombre de usuario ya está en uso. Por favor, elija otro.', 'danger');
+            return;
+        }
+
+        // Make a POST request to the backend register endpoint
         const response = await fetch('http://localhost:9000/auth/register', {
             method: 'POST',
             headers: {
@@ -70,52 +80,43 @@ document.getElementById('registration-form').addEventListener('submit', async fu
             window.location.href = './login.html';
         } else {
             const error = await response.json();
-            alert('Error: ' + error.message);
+            showAlert("Error al registrar el usuario. Por favor, elija otro.", 'danger');
+            console.error('Error:' + error.message || error.error);
         }
     } catch (error) {
         console.error('Error:', error);
-        alert('Ocurrió un error al registrar el usuario.');
+        showAlert('Ocurrió un error al registrar el usuario. Por favor, elija otro.', 'danger');
     }
 });
 
-document.getElementById('registration-form').addEventListener('submit', function (event) {
-    event.preventDefault(); // Prevent default form submission
 
-    const usuario = document.getElementById('usuario').value;
-
-    checkUsernameAvailability(usuario)
-        .then(isAvailable => {
-            if (!isAvailable) {
-                alert('El nombre de usuario ya existe. Por favor elige otro.');
-            } else {
-                this.submit();
-            }
-        })
-        .catch(error => {
-            console.error('Error checking username:', error);
-        });
-});
-
-
-function toggleEmployeeFields() {
+export function toggleEmployeeFields() {
     const userType = document.getElementById('tipo-usuario').value;
     const employeeFields = document.getElementById('employee-fields');
     employeeFields.style.display = userType === '3' ? 'block' : 'none';
 }
 
-function checkUsernameAvailability(usuario) {
-    return fetch(`http://localhost:9000/api/usuario/check_usuario/${usuario}`, {
-        method: 'GET',
+async function checkUsernameAvailability(usuario) {
+    try {
+        const response = await(fetch(`http://localhost:9000/api/usuario/check_usuario/${usuario}`, {
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
             },
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Error checking username availability');
-            }
-            return response.json();
-        });
+        }));
+
+        if(!response.ok){
+            throw new Error("Error verificando disponibilidad de usuario.");
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error('Error verificando disponibilidad de usuario: ', error);
+        return false;
+    }
 }
 
-document.addEventListener('DOMContentLoaded', fetchTipoUsuario);
+document.addEventListener('DOMContentLoaded', function() {
+    fetchTipoUsuario();
+    document.getElementById('tipo-usuario').addEventListener('change', toggleEmployeeFields);
+});

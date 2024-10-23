@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import entornos.iskill_basic.proyecto.model.EstadoPostulacion;
 import entornos.iskill_basic.proyecto.model.Postulacion;
 import entornos.iskill_basic.proyecto.repository.PostulacionRepository;
 
@@ -22,7 +23,7 @@ public class PostulacionService implements IPostulacionService {
     }
 
     @Override
-    public Postulacion create(Postulacion Postulacion){
+    public Postulacion create(Postulacion Postulacion) {
         return PostulacionRepository.save(Postulacion);
     }
 
@@ -37,8 +38,18 @@ public class PostulacionService implements IPostulacionService {
     }
 
     @Override
-    public void delete(Long id){
+    public void delete(Long id) {
         PostulacionRepository.deleteById(id);
         return;
+    }
+
+    @Override
+    public Long countPostulacionByEstadoAndVacanteId(EstadoPostulacion estado, Long id) {
+        return PostulacionRepository.countPostulacionByEstadoAndVacanteId(estado, id);
+    }
+
+    @Override
+    public Long countPostulacionByVacanteId(Long id){
+        return PostulacionRepository.countPostulacionByVacanteId(id);
     }
 }

@@ -1,3 +1,5 @@
+import { showAlert } from './alert.js';
+
 document.getElementById('login-form').addEventListener('submit', async function(event) {
     event.preventDefault(); // Prevents the default form submission behavior
 
@@ -26,16 +28,16 @@ document.getElementById('login-form').addEventListener('submit', async function(
             console.log('Login successful! Token:', data.token);
 
             localStorage.setItem('jwtToken', data.token);
-            localStorage.setItem('tipoUsuario', data.tipoUsuario.nombre);
-            localStorage.setItem('usuarioId', data.usuarioId);
+            localStorage.setItem('tipoUsuario', JSON.stringify(data.tipoUsuario.nombre));
+            localStorage.setItem('usuario', JSON.stringify(data.usuario));
 
            // Redirect based on tipoUsuario
             if(data.tipoUsuario.nombre == "Administrador") {
                 window.location.href = './create_project.html';
             } else if(data.tipoUsuario.nombre == "Empleador") {
-                window.location.href = './empleador_project_list.html';
-            } else {
-
+                window.location.href = './empleador_list_vacantes.html';
+            } else if(data.tipoUsuario.nombre == "Empleado") {
+                window.location.href = './empleado_project_list.html';
             }
         } else {
             showAlert('Usuario o contraseña incorrectos. Por favor, inténtelo de nuevo.', 'danger');
@@ -45,27 +47,3 @@ document.getElementById('login-form').addEventListener('submit', async function(
         showAlert('Ha ocurrido un error del servidor. Por favor, inténtelo de nuevo.', 'danger');
     }
 });
-
-function showAlert(message, type) {
-    const alertPlaceholder = document.getElementById('error-alert');
-
-    // Create a new alert div
-    const alertDiv = document.createElement('div');
-    alertDiv.className = `alert alert-${type} alert-dismissible fade show`;
-    alertDiv.role = 'alert';
-    alertDiv.innerHTML = `
-        ${message}
-        <button type="button" class="close-alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    `;
-
-    // Append the alert to the placeholder
-    alertPlaceholder.appendChild(alertDiv);
-
-    // Add event listener for the close button
-    alertDiv.querySelector('.close-alert').addEventListener('click', () => {
-        alertDiv.classList.remove('show');
-        setTimeout(() => alertDiv.remove(), 150); // Remove alert after fade out
-    });
-}
