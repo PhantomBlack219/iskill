@@ -16,14 +16,14 @@ async function fetchVacantes() {
         }
         const vacantes = await response.json();
 
-        displayProjects(vacantes);
+        displayVacantes(vacantes);
     } catch (error) {
         console.error('Error fetching proyectos:', error);
     }
 }
 
 // Function which displays vacantes on a card list
-function displayProjects(vacantes) {
+function displayVacantes(vacantes) {
     const mainContent = document.querySelector('.main-content');
 
     vacantes.forEach(async vacante => {
@@ -42,39 +42,38 @@ function displayProjects(vacantes) {
                     <div class="status-badge">${vacante.estado}</div>
                 </div>
                 <div class="card-details">
-                    <div class="date-info">
-                        <p>Inicio de convocatoria</p>
+                    <div style="display: flex; align-items: center; justify-content: center;" class="date-info">
+                        <p style="padding-right: 1rem;">Inicio de convocatoria:</p>
                         <p class="bold-text">${vacante.fecha_inicio}</p>
                     </div>
-                    <div class="date-info">
-                        <p>Fin de convocatoria</p>
+                    <div style="display: flex; align-items: center; justify-content: center;" class="date-info">
+                        <p style="padding-right: 1rem;">Fin de convocatoria:</p>
                         <p class="bold-text">${vacante.fecha_fin}</p>
                     </div>
                 </div>
                 <div class="card-extra">
-                    <div>
-                        <p>Proyecto</p>
+                    <div style="display: flex; align-items: center; justify-content: center;">
+                        <p style="padding-right: 1rem;">Proyecto:</p>
                         <p class="gray-text">${vacante.proyecto_id.nombre}</p>
                     </div>
                 </div>
                 <div class="card-extra">
-                    <div>
-                        <p>Puestos Disponibles</p>
+                    <div style="display: flex; align-items: center; justify-content: center;">
+                        <p style="padding-right: 1rem;">Puestos Disponibles:</p>
                         <p class="bold-text">${vacante.puestos_disponibles}</p>
                     </div>
-                    <div>
-                        <p>Aplicaciones</p>
+                    <div style="display: flex; align-items: center; justify-content: center;">
+                        <p style="padding-right: 1rem;">Aplicaciones:</p>
                         <p class="bold-text">${postulacionCountAplicado}</p>
                     </div>
-                    <div>
-                        <p>Seleccionados</p>
+                    <div style="display: flex; align-items: center; justify-content: center;">
+                        <p style="padding-right: 1rem;">Seleccionados:</p>
                         <p class="bold-text">${postulacionCountCountSeleccionado}</p>
                     </div>
                 </div>
-                <div class="card-actions">
-                    <button class="btn btn-delete action-btn" onclick="deleteProject(${vacante.vacante_id})">Eliminar</button>
-                    <button class="btn btn-edit action-btn" onclick="editProject(${vacante.vacante_id})">Editar</button>
-                    <button class="btn btn-details action-btn" onclick="showDetails(${vacante.vacante_id})">Detalles</button>
+                <div style="display: flex; justify-content: center;" class="card-actions">
+                    <button class="btn btn-delete action-btn" onclick="deleteVacante(${vacante.vacante_id})">Eliminar</button>
+                    <button class="btn btn-edit action-btn" onclick="editVacante(${vacante.vacante_id})">Editar</button>
                 </div>
             </div>
         `;
@@ -124,7 +123,7 @@ async function fetchCountByVacanteId(id) {
     }
 }
 
-async function deleteProject(vacanteId) {
+async function deleteVacante(vacanteId) {
     // Ask for confirmation
     const isConfirmed = window.confirm('¿Estás seguro que deseas eliminar la Vacante?');
 
@@ -152,6 +151,10 @@ async function deleteProject(vacanteId) {
             alert('Ocurrió un error eliminando Vacante.');
         }
     }
+}
+
+function editVacante(vacanteId){
+    window.location.href = `empleador_create_vacante.html?vacante_id=${vacanteId}`;
 }
 
 // Call fetchProjects on page load
