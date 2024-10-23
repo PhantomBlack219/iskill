@@ -13,8 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import entornos.iskill_basic.usuario.service.TipoUsuarioService;
 import entornos.iskill_basic.usuario.model.TipoUsuario;
+import entornos.iskill_basic.usuario.service.TipoUsuarioService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
 @RestController
 @RequestMapping("/api/tipo_usuario")
@@ -52,6 +53,7 @@ public class TipoUsuarioController {
      * @return tipo de usuario creado
      */
     @PostMapping
+    @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<TipoUsuario> newTipoUsuario(@RequestBody TipoUsuario tipoUsuario) {
         return ResponseEntity.ok(tipoUsuarioService.create(tipoUsuario));
     }
@@ -63,6 +65,7 @@ public class TipoUsuarioController {
      * @return tipo de usuario actualizado
      */
     @PutMapping
+    @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<TipoUsuario> updateTipoUsuario(@RequestBody TipoUsuario tipoUsuario) {
         return tipoUsuarioService.findById(tipoUsuario.getTipo_usuario_id())
             .map(tu -> ResponseEntity.ok(tipoUsuarioService.update(tipoUsuario)))
@@ -76,6 +79,7 @@ public class TipoUsuarioController {
      * @return tipo de usuario eliminado
      */
     @DeleteMapping("/{id}")
+    @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<?> deleteTipoUsuario(@PathVariable Long id) {
         return tipoUsuarioService.findById(id)
             .map(tu -> {

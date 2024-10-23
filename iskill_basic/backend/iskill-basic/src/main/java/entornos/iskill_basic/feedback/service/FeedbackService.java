@@ -16,22 +16,27 @@ public class FeedbackService implements IFeedbackService {
     private FeedbackRepository feedbackRepository;
 
     @Override
-    public List<Feedback> getAllFeedback() {
+    public List<Feedback> getAll() {
         return feedbackRepository.findAll();
     }
 
     @Override
-    public Optional<Feedback> getFeedbackById(Long id) {
+    public Optional<Feedback> findById(Long id) {
         return feedbackRepository.findById(id);
     }
 
     @Override
-    public Feedback saveFeedback(Feedback feedback) {
+    public Feedback create(Feedback feedback) {
         return feedbackRepository.save(feedback);
     }
 
     @Override
-    public void deleteFeedback(Long id) {
+    public Feedback update(Feedback feedback) {
+        return feedbackRepository.save(feedback);
+    }
+
+    @Override
+    public void delete(Long id) {
         feedbackRepository.deleteById(id);
     }
 }

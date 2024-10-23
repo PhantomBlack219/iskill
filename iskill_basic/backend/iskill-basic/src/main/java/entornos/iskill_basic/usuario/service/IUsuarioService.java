@@ -15,4 +15,6 @@ public interface IUsuarioService {
     Optional<Usuario> findById(Long id);
 
     void delete(Long id);
+
+    public boolean isUsuarioExists(String usuario);
 }

@@ -3,7 +3,9 @@ package entornos.iskill_basic.feedback.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
-import entornos.iskill_basic.vacante.model.Vacante; 
+
+import entornos.iskill_basic.proyecto.model.Vacante;
+import entornos.iskill_basic.usuario.model.Usuario; 
 
 @Entity
 @Table(name = "feedback")
@@ -12,6 +14,11 @@ public class Feedback {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long feedbackId;
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    @NotNull
+    private Usuario usuario;
 
     @ManyToOne
     @JoinColumn(name = "vacante_id")
@@ -25,6 +32,10 @@ public class Feedback {
 
     @Column(name = "fecha_feedback")
     private LocalDate fechaFeedback;
+
+    @Column
+    @Enumerated(EnumType.STRING)
+    private DirigidoA dirigidoA;
 
 
     public Feedback() {

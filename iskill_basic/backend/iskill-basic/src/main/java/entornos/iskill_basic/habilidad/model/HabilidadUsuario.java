@@ -13,7 +13,6 @@ import jakarta.validation.constraints.NotNull;
 @Entity
 @Table(name = "habilidad_usuario")
 public class HabilidadUsuario {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long habilidad_usuario_id;
@@ -66,6 +65,7 @@ public class HabilidadUsuario {
 
     @Override
     public String toString() {
-        return "HabilidadUsuario {id=" + habilidad_usuario_id + ", habilidad=" + habilidad + ", usuario=" + usuario + "}";
+        return "HabilidadUsuario {id=" + habilidad_usuario_id + ", habilidad=" + habilidad + ", usuario=" + usuario
+                + "}";
     }
 }

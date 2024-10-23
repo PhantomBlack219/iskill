@@ -16,7 +16,7 @@ public class Habilidad {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long habilidad_id;
 
-    @Column
+    @Column(unique = true)
     @NotNull
     private String nombre_habilidad;
 

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +17,9 @@ public class UsuarioService implements IUsuarioService {
     @Autowired
     UsuarioRepository usuarioRepository;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     @Override
     public List<Usuario> getAll() {
         return usuarioRepository.findAll();
@@ -23,6 +27,12 @@ public class UsuarioService implements IUsuarioService {
 
     @Override
     public Usuario create(Usuario usuario) {
+        if(isUsuarioExists(usuario.getUsuario())){
+            throw new IllegalArgumentException("El usuario ya existe");
+        }
+        
+        String hashedPassword = passwordEncoder.encode(usuario.getPassword());
+        usuario.setPassword(hashedPassword);
         return usuarioRepository.save(usuario);
     }
 
@@ -39,6 +49,10 @@ public class UsuarioService implements IUsuarioService {
     @Override
     public void delete(Long id) {
         usuarioRepository.deleteById(id);
-        return;
+    }
+
+    @Override
+    public boolean isUsuarioExists(String usuario){
+        return usuarioRepository.findByUsuario(usuario).isPresent();
     }
 }
