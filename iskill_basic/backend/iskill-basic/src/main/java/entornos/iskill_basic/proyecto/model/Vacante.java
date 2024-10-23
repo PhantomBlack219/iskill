@@ -46,6 +46,9 @@ public class Vacante {
     private int puntos;
 
     @Column
+    private EstadoVacante estado;
+
+    @Column
     private Date fecha_inicio_vacante;
 
     @Column
@@ -60,7 +63,7 @@ public class Vacante {
 
     public Vacante(Long vacante_id, @NotNull Proyecto proyecto_id, @NotNull String nombre_vacante,
             @NotNull String descripcion, @NotNull String habilidades_requeridas, @NotNull int puestos_disponibles,
-            @NotNull int puntos, Date fecha_inicio_vacante, Date fecha_fin_vacante) {
+            @NotNull int puntos, EstadoVacante estado, Date fecha_inicio_vacante, Date fecha_fin_vacante) {
         this.vacante_id = vacante_id;
         this.proyecto_id = proyecto_id;
         this.nombre_vacante = nombre_vacante;
@@ -68,6 +71,7 @@ public class Vacante {
         this.habilidades_requeridas = habilidades_requeridas;
         this.puestos_disponibles = puestos_disponibles;
         this.puntos = puntos;
+        this.estado = estado;
         this.fecha_inicio_vacante = fecha_inicio_vacante;
         this.fecha_fin_vacante = fecha_fin_vacante;
     }
@@ -140,6 +144,14 @@ public class Vacante {
 
     public void setPuntos(int puntos) {
         this.puntos = puntos;
+    }
+
+    public EstadoVacante getEstado() {
+        return estado;
+    }
+
+    public void setEstado(EstadoVacante estado) {
+        this.estado = estado;
     }
 
     public Date getFecha_inicio_vacante() {
