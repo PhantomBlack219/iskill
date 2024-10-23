@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import entornos.iskill_basic.habilidad.model.HabilidadUsuario;
 import entornos.iskill_basic.habilidad.service.HabilidadUsuarioService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
 @RestController
 @RequestMapping("/api/habilidad_usuario")
@@ -29,6 +30,7 @@ public class HabilidadUsuarioController {
      * @return lista de habilidades de usuario
      */
     @GetMapping("/list")
+    @SecurityRequirement(name = "bearerAuth")
     public List<HabilidadUsuario> getHabilidadUsuarios() {
         return habilidadUsuarioService.getAll();
     }
@@ -40,6 +42,7 @@ public class HabilidadUsuarioController {
      * @return habilidad de usuario
      */
     @GetMapping("/{id}")
+    @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<HabilidadUsuario> findById(@PathVariable Long id) {
         return habilidadUsuarioService.findById(id)
             .map(ResponseEntity::ok)
@@ -53,6 +56,7 @@ public class HabilidadUsuarioController {
      * @return habilidad de usuario creada
      */
     @PostMapping
+    @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<HabilidadUsuario> newHabilidadUsuario(@RequestBody HabilidadUsuario habilidadUsuario) {
         return ResponseEntity.ok(habilidadUsuarioService.create(habilidadUsuario));
     }
@@ -64,6 +68,7 @@ public class HabilidadUsuarioController {
      * @return habilidad de usuario actualizada
      */
     @PutMapping
+    @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<HabilidadUsuario> updateHabilidadUsuario(@RequestBody HabilidadUsuario habilidadUsuario) {
         return habilidadUsuarioService.findById(habilidadUsuario.getHabilidad_usuario_id())
             .map(hu -> ResponseEntity.ok(habilidadUsuarioService.update(habilidadUsuario)))
@@ -77,6 +82,7 @@ public class HabilidadUsuarioController {
      * @return respuesta de eliminación
      */
     @DeleteMapping("/{id}")
+    @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<?> deleteHabilidadUsuario(@PathVariable Long id) {
         return habilidadUsuarioService.findById(id)
             .map(hu -> {

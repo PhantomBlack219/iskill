@@ -1,4 +1,4 @@
-package entornos.iskill_basic.postulacion.controller;
+package entornos.iskill_basic.proyecto.controller;
 
 import java.util.List;
 
@@ -13,14 +13,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import entornos.iskill_basic.postulacion.service.PostulacionService;
-import entornos.iskill_basic.postulacion.model.Postulacion;
+import entornos.iskill_basic.proyecto.model.Vacante;
+import entornos.iskill_basic.proyecto.service.VacanteService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
 @RestController
-@RequestMapping("/api/Postulacion")
-public class PostulacionController {
+@RequestMapping("/api/vacante")
+public class VacanteController {
     @Autowired
-    PostulacionService PostulacionService;
+    VacanteService VacanteService;
 
     /**
      * Se obtiene la lista de tipos de usuario
@@ -28,8 +29,9 @@ public class PostulacionController {
      * @return lista de tipos de usuario
      */
     @GetMapping("/list")
-    public List<Postulacion> getPostulacions() {
-        return PostulacionService.getAll();
+    @SecurityRequirement(name = "bearerAuth")
+    public List<Vacante> getVacantes() {
+        return VacanteService.getAll();
     }
 
     /**
@@ -39,8 +41,9 @@ public class PostulacionController {
      * @return tipo de usuario
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Postulacion> findById(@PathVariable Long id) {
-        return PostulacionService.findById(id)
+    @SecurityRequirement(name = "bearerAuth")
+    public ResponseEntity<Vacante> findById(@PathVariable Long id) {
+        return VacanteService.findById(id)
             .map(ResponseEntity::ok)
             .orElseGet(() -> ResponseEntity.notFound().build());
     }
@@ -48,24 +51,26 @@ public class PostulacionController {
     /**
      * Se crea un nuevo tipo de usuario
      * 
-     * @param Postulacion tipo de usuario a crear
+     * @param Vacante tipo de usuario a crear
      * @return tipo de usuario creado
      */
     @PostMapping
-    public ResponseEntity<Postulacion> newPostulacion(@RequestBody Postulacion Postulacion) {
-        return ResponseEntity.ok(PostulacionService.create(Postulacion));
+    @SecurityRequirement(name = "bearerAuth")
+    public ResponseEntity<Vacante> newVacante(@RequestBody Vacante Vacante) {
+        return ResponseEntity.ok(VacanteService.create(Vacante));
     }
 
     /**
      * Se actualiza un tipo de usuario
      * 
-     * @param Postulacion tipo de usuario a actualizar
+     * @param Vacante tipo de usuario a actualizar
      * @return tipo de usuario actualizado
      */
     @PutMapping
-    public ResponseEntity<Postulacion> updatePostulacion(@RequestBody Postulacion Postulacion) {
-        return PostulacionService.findById(Postulacion.getPostulacion_id())
-            .map(tu -> ResponseEntity.ok(PostulacionService.update(Postulacion)))
+    @SecurityRequirement(name = "bearerAuth")
+    public ResponseEntity<Vacante> updateVacante(@RequestBody Vacante Vacante) {
+        return VacanteService.findById(Vacante.getVacante_id())
+            .map(tu -> ResponseEntity.ok(VacanteService.update(Vacante)))
             .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
@@ -76,10 +81,11 @@ public class PostulacionController {
      * @return tipo de usuario eliminado
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deletePostulacion(@PathVariable Long id) {
-        return PostulacionService.findById(id)
+    @SecurityRequirement(name = "bearerAuth")
+    public ResponseEntity<?> deleteVacante(@PathVariable Long id) {
+        return VacanteService.findById(id)
             .map(tu -> {
-                PostulacionService.delete(id);
+                VacanteService.delete(id);
                 return ResponseEntity.ok().build();
             })
             .orElseGet(() -> ResponseEntity.notFound().build());

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import entornos.iskill_basic.proyecto.service.ProyectoService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import entornos.iskill_basic.proyecto.model.Proyecto;
 
 @RestController
@@ -28,6 +29,7 @@ public class ProyectoController {
      * @return lista de tipos de usuario
      */
     @GetMapping("/list")
+    @SecurityRequirement(name = "bearerAuth")
     public List<Proyecto> getProyectos() {
         return ProyectoService.getAll();
     }
@@ -39,6 +41,7 @@ public class ProyectoController {
      * @return tipo de usuario
      */
     @GetMapping("/{id}")
+    @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<Proyecto> findById(@PathVariable Long id) {
         return ProyectoService.findById(id)
             .map(ResponseEntity::ok)
@@ -52,6 +55,7 @@ public class ProyectoController {
      * @return tipo de usuario creado
      */
     @PostMapping
+    @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<Proyecto> newProyecto(@RequestBody Proyecto Proyecto) {
         return ResponseEntity.ok(ProyectoService.create(Proyecto));
     }
@@ -63,6 +67,7 @@ public class ProyectoController {
      * @return tipo de usuario actualizado
      */
     @PutMapping
+    @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<Proyecto> updateProyecto(@RequestBody Proyecto Proyecto) {
         return ProyectoService.findById(Proyecto.getProyecto_id())
             .map(tu -> ResponseEntity.ok(ProyectoService.update(Proyecto)))
@@ -76,6 +81,7 @@ public class ProyectoController {
      * @return tipo de usuario eliminado
      */
     @DeleteMapping("/{id}")
+    @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<?> deleteProyecto(@PathVariable Long id) {
         return ProyectoService.findById(id)
             .map(tu -> {

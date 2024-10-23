@@ -1,4 +1,4 @@
-package entornos.iskill_basic.postulacion.service;
+package entornos.iskill_basic.proyecto.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import entornos.iskill_basic.postulacion.model.Postulacion;
-import entornos.iskill_basic.postulacion.repository.PostulacionRepository;
+import entornos.iskill_basic.proyecto.model.Postulacion;
+import entornos.iskill_basic.proyecto.repository.PostulacionRepository;
 
 @Service
 @Transactional

@@ -1,9 +1,9 @@
-package entornos.iskill_basic.vacante.service;
+package entornos.iskill_basic.proyecto.service;
 
 import java.util.List;
 import java.util.Optional;
 
-import entornos.iskill_basic.vacante.model.Vacante;
+import entornos.iskill_basic.proyecto.model.Vacante;
 
 public interface IVacanteService {
     List<Vacante> getAll();

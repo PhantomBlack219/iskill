@@ -7,11 +7,13 @@ import entornos.iskill_basic.feedback.model.Feedback;
 
 public interface IFeedbackService {
 
-    List<Feedback> getAllFeedback();
+    List<Feedback> getAll();
 
-    Optional<Feedback> getFeedbackById(Long id);
+    Optional<Feedback> findById(Long id);
 
-    Feedback saveFeedback(Feedback feedback);
+    Feedback create(Feedback feedback);
 
-    void deleteFeedback(Long id);
+    Feedback update(Feedback feedback);
+
+    void delete(Long id);
 }

@@ -1,9 +1,8 @@
-package entornos.iskill_basic.postulacion.model;
+package entornos.iskill_basic.proyecto.model;
 
 import java.sql.Date;
 
 import entornos.iskill_basic.usuario.model.Usuario;
-import entornos.iskill_basic.vacante.model.Vacante;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -35,7 +34,7 @@ public class Postulacion {
 
     @Column
     @NotNull
-    private String estado;
+    private Estado estado;
 
     @Column
     @NotNull
@@ -45,7 +44,7 @@ public class Postulacion {
     }
 
     public Postulacion(Long postulacion_id, @NotNull Usuario usuario_id, @NotNull Vacante vacante_id,
-            @NotNull String estado, @NotNull Date fecha_postulacion) {
+            @NotNull Estado estado, @NotNull Date fecha_postulacion) {
         this.postulacion_id = postulacion_id;
         this.usuario_id = usuario_id;
         this.vacante_id = vacante_id;
@@ -77,11 +76,11 @@ public class Postulacion {
         this.vacante_id = vacante_id;
     }
 
-    public String getEstado() {
+    public Estado getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(Estado estado) {
         this.estado = estado;
     }
 
@@ -92,8 +91,4 @@ public class Postulacion {
     public void setFecha_postulacion(Date fecha_postulacion) {
         this.fecha_postulacion = fecha_postulacion;
     }
-
-    
-
-    
 }

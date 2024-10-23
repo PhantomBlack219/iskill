@@ -1,8 +1,7 @@
-package entornos.iskill_basic.vacante.model;
+package entornos.iskill_basic.proyecto.model;
 
 import java.sql.Date;
 
-import entornos.iskill_basic.proyecto.model.Proyecto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -47,7 +46,10 @@ public class Vacante {
     private int puntos;
 
     @Column
-    private Date fecha_creacion;
+    private Date fecha_inicio_vacante;
+
+    @Column
+    private Date fecha_fin_vacante;
 
 
     // Constructors
@@ -58,7 +60,7 @@ public class Vacante {
 
     public Vacante(Long vacante_id, @NotNull Proyecto proyecto_id, @NotNull String nombre_vacante,
             @NotNull String descripcion, @NotNull String habilidades_requeridas, @NotNull int puestos_disponibles,
-            @NotNull int puntos, Date fecha_creacion) {
+            @NotNull int puntos, Date fecha_inicio_vacante, Date fecha_fin_vacante) {
         this.vacante_id = vacante_id;
         this.proyecto_id = proyecto_id;
         this.nombre_vacante = nombre_vacante;
@@ -66,7 +68,8 @@ public class Vacante {
         this.habilidades_requeridas = habilidades_requeridas;
         this.puestos_disponibles = puestos_disponibles;
         this.puntos = puntos;
-        this.fecha_creacion = fecha_creacion;
+        this.fecha_inicio_vacante = fecha_inicio_vacante;
+        this.fecha_fin_vacante = fecha_fin_vacante;
     }
 
 
@@ -139,18 +142,19 @@ public class Vacante {
         this.puntos = puntos;
     }
 
-
-    public Date getFecha_creacion() {
-        return fecha_creacion;
+    public Date getFecha_inicio_vacante() {
+        return fecha_inicio_vacante;
     }
 
-
-    public void setFecha_creacion(Date fecha_creacion) {
-        this.fecha_creacion = fecha_creacion;
+    public void setFecha_inicio_vacante(Date fecha_inicio_vacante) {
+        this.fecha_inicio_vacante = fecha_inicio_vacante;
     }
 
-    
+    public Date getFecha_fin_vacante() {
+        return fecha_fin_vacante;
+    }
 
-   
-
+    public void setFecha_fin_vacante(Date fecha_fin_vacante) {
+        this.fecha_fin_vacante = fecha_fin_vacante;
+    }
 }

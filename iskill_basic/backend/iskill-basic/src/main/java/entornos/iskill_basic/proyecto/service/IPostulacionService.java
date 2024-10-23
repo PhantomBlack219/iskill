@@ -1,9 +1,9 @@
-package entornos.iskill_basic.postulacion.service;
+package entornos.iskill_basic.proyecto.service;
 
 import java.util.List;
 import java.util.Optional;
 
-import entornos.iskill_basic.postulacion.model.Postulacion;
+import entornos.iskill_basic.proyecto.model.Postulacion;
 
 public interface IPostulacionService {
     List<Postulacion> getAll();

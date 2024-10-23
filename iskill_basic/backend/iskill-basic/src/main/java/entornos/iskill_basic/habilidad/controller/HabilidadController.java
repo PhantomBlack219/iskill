@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import entornos.iskill_basic.habilidad.model.Habilidad;
 import entornos.iskill_basic.habilidad.service.HabilidadService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
 @RestController
 @RequestMapping("/api/habilidad")
@@ -29,6 +30,7 @@ public class HabilidadController {
      * @return lista de habilidades
      */
     @GetMapping("/list")
+    @SecurityRequirement(name = "bearerAuth")
     public List<Habilidad> getHabilidades() {
         return habilidadService.getAll();
     }
@@ -40,6 +42,7 @@ public class HabilidadController {
      * @return habilidad
      */
     @GetMapping("/{id}")
+    @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<Habilidad> findById(@PathVariable Long id) {
         return habilidadService.findById(id)
             .map(ResponseEntity::ok)
@@ -53,6 +56,7 @@ public class HabilidadController {
      * @return habilidad creada
      */
     @PostMapping
+    @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<Habilidad> newHabilidad(@RequestBody Habilidad habilidad) {
         return ResponseEntity.ok(habilidadService.create(habilidad));
     }
@@ -64,6 +68,7 @@ public class HabilidadController {
      * @return habilidad actualizada
      */
     @PutMapping
+    @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<Habilidad> updateHabilidad(@RequestBody Habilidad habilidad) {
         return habilidadService.findById(habilidad.getHabilidad_id())
             .map(h -> ResponseEntity.ok(habilidadService.update(habilidad)))
@@ -77,6 +82,7 @@ public class HabilidadController {
      * @return respuesta de eliminación
      */
     @DeleteMapping("/{id}")
+    @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<?> deleteHabilidad(@PathVariable Long id) {
         return habilidadService.findById(id)
             .map(h -> {

@@ -13,7 +13,7 @@ import entornos.iskill_basic.habilidad.repository.HabilidadUsuarioRepository;
 @Service
 @Transactional
 public class HabilidadUsuarioService implements IHabilidadUsuarioService {
-
+    
     @Autowired
     HabilidadUsuarioRepository habilidadUsuarioRepository;
 

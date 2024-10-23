@@ -17,7 +17,7 @@ public class TipoUsuario {
     @NotNull
     private Long tipo_usuario_id;
 
-    @Column
+    @Column(unique = true)
     @NotNull
     private String nombre;
 
