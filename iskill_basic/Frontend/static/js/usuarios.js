@@ -71,6 +71,7 @@ function saveUsuario() {
    
        // Crear el objeto de datos para enviar
        let data = {
+            'usuario_id': 0,
            'nombre': nombre,
            'apellido': apellido,
            'usuario': usuario,
