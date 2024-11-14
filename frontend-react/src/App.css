@@ -1,0 +1,26 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f5fa !important;
+}
+.bg-custom {
+    background-color: #ffffff;
+    border-radius: 45px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+}
+.btn-custom {
+    background-color: #00667F !important;
+    border: none !important;
+    color: #ffffff;
+}
+.btn-custom:hover {
+    background-color: #005266;
+    color: #ffffff;
+    box-shadow: 0 0 15px rgba(0, 102, 127, 0.5);
+}
+.forgot-password {
+    color: #00667F;
+    font-weight: bold;
+}
+.forgot-password:hover {
+    text-decoration: underline;
+}
