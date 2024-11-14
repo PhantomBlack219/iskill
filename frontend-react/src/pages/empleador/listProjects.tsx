@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../../components/navbar';
 import Sidebar from '../../components/sidebar';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 interface TipoUsuario {
@@ -85,14 +85,14 @@ const ListProjects = () => {
                 confirmButtonText: 'Sí, eliminar',
                 cancelButtonText: 'Cancelar',
             }).then(async (result) => {
-                if(result.isConfirmed){
+                if (result.isConfirmed) {
                     const response = await fetch(`${process.env.REACT_APP_PUBLIC_HOST}/api/proyecto/${id}`, {
                         method: 'DELETE',
                         headers: {
                             'Authorization': `Bearer ${token}`
                         },
                     });
-        
+
                     if (!response.ok) {
                         Swal.fire({
                             icon: 'error',
@@ -105,6 +105,7 @@ const ListProjects = () => {
                             title: 'Proyecto eliminado',
                             text: 'El proyecto ha sido eliminado exitosamente.'
                         })
+                        // Refresh projects
                         reloadProyectos();
                     }
                 }
@@ -118,6 +119,11 @@ const ListProjects = () => {
         }
     }
 
+    const editProject = (id: number) => {
+
+    }
+
+    // Reloads projects when required
     const reloadProyectos = () => {
         setReload(!reload);
     }
@@ -129,6 +135,16 @@ const ListProjects = () => {
 
             <div className='content-wrapper'>
                 <div className="main-content">
+                    <div className="gap-div">
+                        <p className="bold-title">Mis Proyectos</p>
+                        <div style={{ display: 'flex', justifyContent: 'center' }} className="gap-div-2">
+                            <Link to={"/employer/create-project"}>
+                                <img src="/images/crear.png" alt="Icono Crear" className="create-icon" />
+                            </Link>
+                            <div><p className="bold-title">Crear Proyecto</p></div>
+                        </div>
+                    </div>
+
                     <div className="content-section">
                         {
                             projects.map((project) => (
@@ -142,7 +158,7 @@ const ListProjects = () => {
                                         </div>
                                         <div style={{ display: 'flex', justifyContent: 'center' }} className="card-actions">
                                             <button className="btn btn-delete action-btn" onClick={() => deleteProject(project.proyecto_id)}>Eliminar</button>
-                                            <button className="btn btn-edit action-btn">Editar</button>
+                                            <button className="btn btn-edit action-btn" onClick={() => editProject(project.proyecto_id)}>Editar</button>
                                         </div>
                                     </div>
                                 </div>
