@@ -1,7 +1,6 @@
 import React from 'react';
 import Sidebar from '../../components/sidebar';
 import Navbar from '../../components/navbar';
-import Footer from '../../components/footer';
 
 const CreateProyect = () => {
 
