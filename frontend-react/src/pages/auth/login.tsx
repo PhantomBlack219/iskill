@@ -53,7 +53,8 @@ const Login = () => {
                     localStorage.setItem('jwtToken', data.token);
                     localStorage.setItem('usuario', JSON.stringify(data.usuario));
 
-                    navigate("/create-project");
+                    // TODO: redirect based on role
+                    navigate("/employer/my-projects");
                 }
             } catch (e) {
                 Swal.fire({
@@ -67,11 +68,11 @@ const Login = () => {
 
     return (
         <div className="d-flex justify-content-center align-items-center vh-100">
-            <div className="container bg-custom shadow overflow-hidden" style={{ maxWidth: 1200 }}>
+            <div className="bg-custom shadow overflow-hidden" style={{ maxWidth: 1200 }}>
                 <div className="row g-0">
                     <div className="col-lg-5 p-5">
                         <div className="text-center mb-4">
-                            <img src="/images/logo.png" alt="ISkill logo" className="img-fluid" style={{ width: 100 }} />
+                            <img src="/images/logo.png" alt="iSkill logo" className="img-fluid" style={{ width: 100 }} />
                             <h2 className="fw-bold mt-3">Inicia Sesión</h2>
                         </div>
                         <div id="error-alert" />
