@@ -33,7 +33,7 @@ document.getElementById('login-form').addEventListener('submit', async function(
 
            // Redirect based on tipoUsuario
             if(data.tipoUsuario.nombre == "Administrador") {
-                window.location.href = './create_project.html';
+                window.location.href = './admin.html';
             } else if(data.tipoUsuario.nombre == "Empleador") {
                 window.location.href = './empleador_list_vacantes.html';
             } else if(data.tipoUsuario.nombre == "Empleado") {
