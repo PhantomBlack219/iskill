@@ -13,7 +13,7 @@ const Sidebar = () => {
                     </Link>
                 </li>
                 <li className="nav-item">
-                    <Link className="nav-link" to={"empleador_list_proyecto.html"}>
+                    <Link className="nav-link" to={"/employer/my-projects"}>
                         <img src="/images/misProyectos.png" alt="Icono Desafíos" className="nav-icon" width={30} height={30} /> Mis Proyectos
                     </Link>
                 </li>

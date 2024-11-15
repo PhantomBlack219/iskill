@@ -70,7 +70,6 @@ const ListProjects = () => {
                 }
             }
             fetchProjects();
-            console.log(projects);
         }
     }, []);
 
@@ -157,8 +156,8 @@ const ListProjects = () => {
                                             </div>
                                         </div>
                                         <div style={{ display: 'flex', justifyContent: 'center' }} className="card-actions">
-                                            <button className="btn btn-delete action-btn" onClick={() => deleteProject(project.proyecto_id)}>Eliminar</button>
-                                            <button className="btn btn-edit action-btn" onClick={() => editProject(project.proyecto_id)}>Editar</button>
+                                            <button className="btn btn-primary btn-custom" onClick={() => editProject(project.proyecto_id)}>Editar</button>
+                                            <button className="btn btn-danger" onClick={() => deleteProject(project.proyecto_id)}>Eliminar</button>
                                         </div>
                                     </div>
                                 </div>

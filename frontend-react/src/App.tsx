@@ -2,9 +2,8 @@ import React, { Fragment } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Login from './pages/auth/login';
-//import 'bootstrap/dist/css/bootstrap.min.css';
-import CreateProyect from './pages/empleador/createProject';
-import ListProjects from './pages/empleador/listProjects';
+import CreateProyect from './pages/employer/createProject';
+import ListProjects from './pages/employer/listProjects';
 
 function App() {
   return (
