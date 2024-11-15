@@ -1,10 +1,37 @@
 import React, { FormEvent, useState } from 'react';
 import Sidebar from '../../components/sidebar';
 import Navbar from '../../components/navbar';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
+interface TipoUsuario {
+    tipo_usuario_id: number;
+    nombre: string;
+    descripcion: string;
+}
+
+interface Usuario {
+    usuario_id: number;
+    tipo_usuario_id: TipoUsuario;
+    nombre: string;
+    apellido: string;
+    email: string;
+    usuario: string;
+    password: string;
+    fecha_registro: Date;
+    logros: string;
+    objetivos_carrera: string;
+}
+
+interface Proyecto {
+    proyecto_id: number;
+    usuario_id: Usuario;
+    nombre: string;
+    descripcion: string;
+}
+
 const CreateProyect = () => {
+    const location = useLocation();
     const navigate = useNavigate();
     
     const token = localStorage.getItem('jwtToken');
@@ -12,11 +39,14 @@ const CreateProyect = () => {
 
     const usuarioJSON = usuario ? JSON.parse(usuario) : null;
     
-    const [project, setProject] = useState({
+    const [project, setProject] = useState(location.state?.project || {
+        proyecto_id: '',
         usuario_id: usuario ? { usuario_id: usuarioJSON.usuario_id } : '',
         nombre: '',
         descripcion: ''
     });
+
+    const { proyecto_id, usuario_id, nombre, descripcion } = project;
 
     const onChange = (e: any) => {
         setProject({
@@ -34,47 +64,66 @@ const CreateProyect = () => {
             text: '¿Deseas guardar el proyecto?',
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
+            confirmButtonColor: '#00667F',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Guardar',
             cancelButtonText: 'Cancelar'
         }).then(async (result) => {
             if (result.isConfirmed) {
-                try {
-                    const response = await fetch(`${process.env.REACT_APP_PUBLIC_HOST}/api/proyecto`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${token}`
-                        },
-                        body: JSON.stringify(project)
-                    });
-
-                    if (!response.ok) {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error',
-                            text: 'Ocurrió un error guardando el proyecto.'
-                        })
-                    } else {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Proyecto guardado',
-                            text: 'El proyecto se ha guardado correctamente.'
-                        }).then(() => {
-                            navigate('/employer/my-projects');
-                        });
-                    }
-                } catch (error) {
+                if(usuario_id === ''){
                     Swal.fire({
                         icon: 'error',
                         title: 'Error',
-                        text: 'Ocurrió un error guardando el proyecto.'
-                    })
+                        text: 'No se pudo obtener el usuario para crear el proyecto.',
+                        confirmButtonColor: '#00667F'
+                    });
+                } else {
+                    const requestMethod = proyecto_id === '' ? 'POST' : 'PUT';
+                    try {
+                        const response = await fetch(`${process.env.REACT_APP_PUBLIC_HOST}/api/proyecto`, {
+                            method: requestMethod,
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${token}`
+                            },
+                            body: JSON.stringify(project)
+                        });
+            
+                        if (!response.ok) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'Ocurrió un error guardando el proyecto.',
+                                confirmButtonColor: '#00667F'
+                            })
+                        } else {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Proyecto guardado',
+                                text: 'El proyecto se ha guardado correctamente.',
+                                confirmButtonColor: '#00667F'
+                            }).then(() => {
+                                navigate('/employer/my-projects');
+                            });
+                        }
+                    } catch (error) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Ocurrió un error guardando el proyecto.',
+                            confirmButtonColor: '#00667F'
+                        })
+                    }
                 }
             }
         });
     }
+
+
+    const createProject = async () => {
+        
+    }
+
 
     return (
         <div className='wrapper'>
@@ -89,11 +138,11 @@ const CreateProyect = () => {
                                     <form id="project-form" onSubmit={(e) => saveProject(e)}>
                                         <div className="mb-3">
                                             <label htmlFor="nombre" className="form-label fw-bold">Nombre del Proyecto</label>
-                                            <input type="text" id="nombre" name="nombre" className="form-control" placeholder="Ingresa el nombre del proyecto"  required onChange={onChange} />
+                                            <input type="text" id="nombre" name="nombre" className="form-control" placeholder="Ingresa el nombre del proyecto" value={nombre} required onChange={onChange} />
                                         </div>
                                         <div className="mb-3">
                                             <label htmlFor="password" className="form-label fw-bold">Descripción del Proyecto</label>
-                                            <textarea id="descripcion" name="descripcion" className="form-control" rows={3} placeholder="Ingresa una descripción del proyecto"  required onChange={onChange} />
+                                            <textarea id="descripcion" name="descripcion" className="form-control" rows={3} placeholder="Ingresa una descripción del proyecto" value={descripcion} required onChange={onChange} />
                                         </div>
 
                                         <div className="d-flex justify-content-center gap-3 mt-4">

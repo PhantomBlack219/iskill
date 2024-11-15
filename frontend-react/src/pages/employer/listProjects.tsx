@@ -71,7 +71,7 @@ const ListProjects = () => {
             }
             fetchProjects();
         }
-    }, []);
+    }, [navigate, reload, token]);
 
     const deleteProject = async (id: number) => {
         try {
@@ -80,7 +80,7 @@ const ListProjects = () => {
                 title: '¿Estás seguro que deseas eliminar el proyecto?',
                 text: 'No podrás revertir esta acción.',
                 showCancelButton: true,
-                confirmButtonColor: "#3085d6",
+                confirmButtonColor: "#dc3545",
                 confirmButtonText: 'Sí, eliminar',
                 cancelButtonText: 'Cancelar',
             }).then(async (result) => {
@@ -96,13 +96,15 @@ const ListProjects = () => {
                         Swal.fire({
                             icon: 'error',
                             title: 'Error',
-                            text: 'Ocurrió un error eliminando el proyecto. Intenta de nuevo.'
+                            text: 'Ocurrió un error eliminando el proyecto. Intenta de nuevo.',
+                            confirmButtonColor: '#00667F'
                         })
                     } else {
                         Swal.fire({
                             icon: 'success',
                             title: 'Proyecto eliminado',
-                            text: 'El proyecto ha sido eliminado exitosamente.'
+                            text: 'El proyecto ha sido eliminado exitosamente.',
+                            confirmButtonColor: '#00667F'
                         })
                         // Refresh projects
                         reloadProyectos();
@@ -113,13 +115,19 @@ const ListProjects = () => {
             Swal.fire({
                 icon: 'warning',
                 title: 'Error',
-                text: 'Ocurrió un error cargando los proyectos.'
+                text: 'Ocurrió un error cargando los proyectos.',
+                confirmButtonColor: '#00667F'
             })
         }
     }
 
-    const editProject = (id: number) => {
-
+    const editProject = (project: Proyecto) => {
+        navigate(
+            '/employer/create-project',
+            {
+                state: { project: project }
+            }
+        )
     }
 
     // Reloads projects when required
@@ -156,7 +164,7 @@ const ListProjects = () => {
                                             </div>
                                         </div>
                                         <div style={{ display: 'flex', justifyContent: 'center' }} className="card-actions">
-                                            <button className="btn btn-primary btn-custom" onClick={() => editProject(project.proyecto_id)}>Editar</button>
+                                            <button className="btn btn-primary btn-custom" onClick={() => editProject(project)}>Editar</button>
                                             <button className="btn btn-danger" onClick={() => deleteProject(project.proyecto_id)}>Eliminar</button>
                                         </div>
                                     </div>

@@ -1,8 +1,10 @@
-import { Icon } from '@iconify/react';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
+    const usuario = localStorage.getItem('usuario');
+    const usuarioJSON = usuario ? JSON.parse(usuario) : null;
+
     return (
         <div className="horizontal-navbar">
             <input type="text" placeholder="Buscar..." className="search-bar" />
@@ -12,7 +14,7 @@ const Navbar = () => {
             </div>
             <div className="right-content">
                 <div className="user-info">
-                    <p id="nombre-usuario">Hola, Nombre</p>
+                    <p id="nombre-usuario">Hola, {usuarioJSON.nombre || ''}</p>
                     <p id="tipo-usuario" />
                 </div>
                 <img src="/images/perfil.png" alt="Perfil" className="profile-img" />
