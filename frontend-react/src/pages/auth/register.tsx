@@ -1,9 +1,129 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { FormEvent, useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { Icon } from '@iconify/react';
 
+interface TipoUsuario {
+    tipo_usuario_id: number;
+    nombre: string;
+    descripcion: string;
+}
+
+interface Usuario {
+    usuario_id: number;
+    tipo_usuario_id: TipoUsuario;
+    nombre: string;
+    apellido: string;
+    email: string;
+    usuario: string;
+    password: string;
+    fecha_registro: Date;
+    logros: string;
+    objetivos_carrera: string;
+}
+
 const Register = () => {
+    const navigate = useNavigate();
+
+    const [tipoUsuarios, setTipoUsuarios] = useState<TipoUsuario[]>([]);
+    const [usuario, setUsuario] = useState<Usuario>({
+        usuario_id: 0,
+        tipo_usuario_id: { tipo_usuario_id: 0, nombre: '', descripcion: '' },
+        nombre: '',
+        apellido: '',
+        email: '',
+        usuario: '',
+        password: '',
+        fecha_registro: new Date(),
+        logros: '',
+        objetivos_carrera: ''
+    });
+    const [formData, setFormData] = useState({ password: '', confirm_password: '' });
+
+    useEffect(() => {
+        const fetchTipoUsuarios = async () => {
+            try {
+                const response = await fetch(`${process.env.REACT_APP_PUBLIC_HOST}/api/tipo_usuario/list`);
+                const data = await response.json();
+                const filteredData = data.filter((tipo: TipoUsuario) => tipo.tipo_usuario_id !== 1);
+                setTipoUsuarios(filteredData);
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        fetchTipoUsuarios();
+    }, []);
+
+    const onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setUsuario({
+            ...usuario,
+            [e.target.name]: e.target.value
+        })
+
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value,
+        });
+    };
+
+    const onTipoUsuarioChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setUsuario({
+            ...usuario,
+            tipo_usuario_id: { tipo_usuario_id: parseInt(e.target.value), nombre: '', descripcion: '' }
+        });
+    };
+
+    const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        if (formData.password !== formData.confirm_password) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Las contraseñas no coinciden.'
+            });
+            return;
+        }
+
+        register();
+    };
+
+    const register = async () => {
+        try {
+            usuario.fecha_registro = new Date();
+
+            const response = await fetch(`${process.env.REACT_APP_PUBLIC_HOST}/auth/register`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(usuario)
+            });
+
+            if (!response.ok) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Error al registrar usuario.'
+                });
+            } else {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Usuario registrado',
+                    text: 'Usuario registrado exitosamente.'
+                }).then(() => {
+                    navigate('/');
+                });
+            }
+        } catch (e) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Error al registrar usuario.'
+            });
+        }
+    };
+
     return (
         <div className='d-flex justify-content-center align-items-center vh-100'>
             <div className="bg-custom shadow overflow-hidden w-100" style={{ maxWidth: 1200 }}>
@@ -14,7 +134,7 @@ const Register = () => {
                         </div>
                         <h3 className="fw-bold mt-3 mb-3 text-center">Registro de Usuario</h3>
 
-                        <form id="registration-form">
+                        <form id="registration-form" onSubmit={onSubmit}>
                             <div className='user-details'>
                                 <div className="d-flex gap-3">
                                     <div className="flex-grow-1 mb-3">
@@ -26,6 +146,7 @@ const Register = () => {
                                                 name="nombre"
                                                 className="form-control"
                                                 placeholder="Ingresa tu nombre"
+                                                onChange={(e) => onChange(e)}
                                                 required
                                             />
                                         </div>
@@ -40,6 +161,7 @@ const Register = () => {
                                                 name="apellido"
                                                 className="form-control"
                                                 placeholder="Ingresa tu apellido"
+                                                onChange={(e) => onChange(e)}
                                                 required
                                             />
                                         </div>
@@ -56,6 +178,7 @@ const Register = () => {
                                                 name="email"
                                                 className="form-control"
                                                 placeholder="Ingresa tu correo electrónico"
+                                                onChange={(e) => onChange(e)}
                                                 required
                                             />
                                             <span className="input-group-text">
@@ -73,6 +196,7 @@ const Register = () => {
                                                 name="usuario"
                                                 className="form-control"
                                                 placeholder="Ingresa un usuario"
+                                                onChange={(e) => onChange(e)}
                                                 required
                                             />
                                             <span className="input-group-text">
@@ -92,6 +216,7 @@ const Register = () => {
                                                 name="password"
                                                 className="form-control"
                                                 placeholder="Ingresa una contraseña"
+                                                onChange={(e) => onChange(e)}
                                                 required
                                             />
                                             <span className="input-group-text">
@@ -101,14 +226,15 @@ const Register = () => {
                                     </div>
 
                                     <div className="flex-grow-1 mb-3">
-                                        <label htmlFor="confirm-password" className="form-label fw-bold">Confirmar Contraseña</label>
+                                        <label htmlFor="confirm_password" className="form-label fw-bold">Confirmar Contraseña</label>
                                         <div className="input-group">
                                             <input
                                                 type="password"
-                                                id="confirm-password"
-                                                name="confirm-password"
+                                                id="confirm_password"
+                                                name="confirm_password"
                                                 className="form-control"
                                                 placeholder="Confirma la contraseña"
+                                                onChange={(e) => onChange(e)}
                                                 required
                                             />
                                             <span className="input-group-text">
@@ -119,48 +245,64 @@ const Register = () => {
                                 </div>
 
                                 <div className="flex-grow-1 mb-3">
-                                    <label htmlFor="usuario" className="form-label fw-bold">Tipo de Usuario</label>
+                                    <label htmlFor="tipo-usuario" className="form-label fw-bold">Tipo de Usuario</label>
                                     <div className="input-group">
-                                        <select id="tipo-usuario" name="tipo-usuario" required>
-                                            <option disabled selected>Seleccione una opción</option>
+                                        <select
+                                            name="tipo-usuario"
+                                            className="form-control"
+                                            value={usuario.tipo_usuario_id.tipo_usuario_id}
+                                            onChange={(e) => { onTipoUsuarioChange(e) }}
+                                            required
+                                        >
+                                            <option value="">Seleccionar tipo de Usuario</option>
+                                            {
+                                                tipoUsuarios.map((tipo) => (
+                                                    <option key={tipo.tipo_usuario_id} value={tipo.tipo_usuario_id}>
+                                                        {tipo.nombre}
+                                                    </option>
+                                                ))
+                                            }
                                         </select>
                                     </div>
                                 </div>
 
-
-                                <div className='user-details'>
-                                    <div className="d-flex gap-3">
-                                        <div className="flex-grow-1 mb-3">
-                                            <label htmlFor="logros" className="form-label fw-bold">Logros</label>
-                                            <div className="input-group">
-                                                <textarea
-                                                    id="logros"
-                                                    name="logros"
-                                                    className="form-control"
-                                                    placeholder="Ingresa tus logros"
-                                                />
-                                                <span className="input-group-text">
-                                                    <Icon icon="mdi:account-success" className="text-muted" />
-                                                </span>
+                                {usuario.tipo_usuario_id.tipo_usuario_id == 3 && (
+                                    <div className='user-details'>
+                                        <div className="d-flex gap-3">
+                                            <div className="flex-grow-1 mb-3">
+                                                <label htmlFor="logros" className="form-label fw-bold">Logros</label>
+                                                <div className="input-group">
+                                                    <textarea
+                                                        id="logros"
+                                                        name="logros"
+                                                        className="form-control"
+                                                        placeholder="Ingresa tus logros"
+                                                        onChange={(e) => onChange(e)}
+                                                    />
+                                                    <span className="input-group-text">
+                                                        <Icon icon="mdi:account-success" className="text-muted" />
+                                                    </span>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div className="flex-grow-1 mb-3">
-                                            <label htmlFor="objetivos" className="form-label fw-bold">Objetivos de Carrera</label>
-                                            <div className="input-group">
-                                                <textarea
-                                                    id="objetivos"
-                                                    name="objetivos"
-                                                    className="form-control"
-                                                    placeholder="Ingresa tus objetivos de carrera"
-                                                />
-                                                <span className="input-group-text">
-                                                    <Icon icon="mdi:target-arrow" className="text-muted" />
-                                                </span>
+                                            <div className="flex-grow-1 mb-3">
+                                                <label htmlFor="objetivos_carrera" className="form-label fw-bold">Objetivos de Carrera</label>
+                                                <div className="input-group">
+                                                    <textarea
+                                                        id="objetivos_carrera"
+                                                        name="objetivos_carrera"
+                                                        className="form-control"
+                                                        placeholder="Ingresa tus objetivos de carrera"
+                                                        onChange={(e) => onChange(e)}
+                                                    />
+                                                    <span className="input-group-text">
+                                                        <Icon icon="mdi:target-arrow" className="text-muted" />
+                                                    </span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                )}
                             </div>
                             <div className="text-center">
                                 <button className="btn btn-primary btn-custom mt-3 justify-content-center w-25">Regístrate</button>
