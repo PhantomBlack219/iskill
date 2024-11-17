@@ -6,6 +6,7 @@ import CreateProyect from './pages/employer/createProject';
 import ListProjects from './pages/employer/listProjects';
 import ListVacancies from './pages/employer/listVacancies';
 import CreateVacant from './pages/employer/createVacant';
+import Register from './pages/auth/register';
 
 function App() {
   return (
@@ -13,10 +14,13 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Login/>} />
-          <Route path="/employer/create-project" element={<CreateProyect/>} />
-          <Route path="/employer/my-projects" element={<ListProjects/>} />
-          <Route path="/employer/create-vacant" element={<CreateVacant/>} />
-          <Route path="/employer/my-vacancies" element={<ListVacancies/>} />
+          <Route path="/register" element={<Register/>} />
+          <Route path="employer">
+            <Route path="my-projects" element={<ListProjects/>} />
+            <Route path="create-project" element={<CreateProyect/>} />
+            <Route path="my-vacancies" element={<ListVacancies/>} />
+            <Route path="create-vacant" element={<CreateVacant/>} />
+          </Route>
         </Routes>
       </Router>
     </Fragment>

@@ -40,7 +40,11 @@ public class VacanteService implements IVacanteService {
     @Override
     public void delete(Long id){
         VacanteRepository.deleteById(id);
-        return;
+    }
+
+    @Override
+    public List<Vacante> getVacantesByProyectoId(Long id){
+        return VacanteRepository.getVacantesByProyectoId(id);
     }
 
     @Override

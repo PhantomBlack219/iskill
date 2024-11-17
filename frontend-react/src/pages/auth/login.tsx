@@ -1,6 +1,7 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { Icon } from '@iconify/react';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -25,7 +26,7 @@ const Login = () => {
     }
 
     const login = async () => {
-        if(password.length < 3){
+        if (password.length < 3) {
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
@@ -42,7 +43,7 @@ const Login = () => {
                     body: JSON.stringify(user)
                 });
 
-                if(!response.ok){
+                if (!response.ok) {
                     Swal.fire({
                         icon: 'error',
                         title: 'Error',
@@ -75,20 +76,29 @@ const Login = () => {
                             <img src="/images/logo.png" alt="iSkill logo" className="img-fluid" style={{ width: 100 }} />
                             <h2 className="fw-bold mt-3">Inicia Sesión</h2>
                         </div>
-                        <div id="error-alert" />
                         <form id="login-form" onSubmit={(e) => onSubmit(e)}>
                             <div className="mb-3">
                                 <label htmlFor="usuario" className="form-label fw-bold">Usuario</label>
-                                <input type="text" id="usuario" name="usuario" className="form-control" value={usuario} placeholder="Ingresa tu usuario" onChange={(e) => onChange(e)} required />
+                                <div className='input-group'>
+                                    <input type="text" id="usuario" name="usuario" className="form-control" value={usuario} placeholder="Ingresa tu usuario" onChange={(e) => onChange(e)} required />
+                                    <span className='input-group-text'>
+                                        <Icon icon="mdi:account" className="text-muted" />
+                                    </span>
+                                </div>
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="password" className="form-label fw-bold">Contraseña</label>
-                                <input type="password" id="password" name="password" className="form-control" value={password} placeholder="Ingresa tu contraseña" onChange={(e) => onChange(e)} required />
+                                <div className='input-group'>
+                                    <input type="password" id="password" name="password" className="form-control" value={password} placeholder="Ingresa tu contraseña" onChange={(e) => onChange(e)} required />
+                                    <span className='input-group-text'>
+                                        <Icon icon="mdi:lock" className="text-muted" />
+                                    </span>
+                                </div>
                             </div>
                             <button type="submit" className="btn btn-primary btn-custom w-100 py-2">Ingresar</button>
                         </form>
                         <p className="mt-3 text-center"><Link to={"#"} className="text-decoration-none forgot-password">¿Olvidaste tu contraseña?</Link></p>
-                        <p className="mt-3 text-center">¿No tienes cuenta? <a href="register.html" className="text-decoration-none forgot-password">Regístrate</a></p>
+                        <p className="mt-3 text-center">¿No tienes cuenta? <Link to={"/register"} className="text-decoration-none forgot-password">Regístrate</Link></p>
                     </div>
                     <div className="col-lg-7">
                         <img src="/images/bienvenida.jpg" alt="Welcome back" className="img-fluid h-100 w-100" style={{ objectFit: 'cover' }} />

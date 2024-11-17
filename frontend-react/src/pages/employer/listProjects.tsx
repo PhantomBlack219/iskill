@@ -3,6 +3,7 @@ import Navbar from '../../components/navbar';
 import Sidebar from '../../components/sidebar';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { jwtDecode, JwtPayload } from 'jwt-decode';
 
 interface TipoUsuario {
     tipo_usuario_id: number;
@@ -37,39 +38,56 @@ const ListProjects = () => {
     const [reload, setReload] = useState(false);
 
     const token = localStorage.getItem('jwtToken');
+    const decodedToken = token ? jwtDecode<JwtPayload>(token) : null;
+    
+    const usuario = localStorage.getItem('usuario');
+
+    const usuarioJSON = usuario ? JSON.parse(usuario) : null;
 
     useEffect(() => {
-        if (token === null) {
-            navigate('/');
-        } else {
-            const fetchProjects = async () => {
-                try {
-                    const response = await fetch(`${process.env.REACT_APP_PUBLIC_HOST}/api/proyecto/list`, {
-                        method: 'GET',
-                        headers: {
-                            'Authorization': `Bearer ${token}`
-                        },
-                    });
-
-                    if (!response.ok) {
+        if (decodedToken !== null) {
+            let currentDate = new Date();
+            if (decodedToken.exp && decodedToken.exp * 1000 < currentDate.getTime()) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Sesión expirada',
+                    text: 'Tu sesión ha expirado. Por favor, inicia sesión de nuevo.',
+                    confirmButtonColor: '#00667F',
+                }).then(() => {
+                    localStorage.removeItem('jwtToken');
+                    localStorage.removeItem('usuario');
+                    navigate('/');
+                });
+            } else {
+                const fetchProjects = async () => {
+                    try {
+                        const response = await fetch(`${process.env.REACT_APP_PUBLIC_HOST}/api/proyecto/usuario_id/${usuarioJSON.usuario_id}`, {
+                            method: 'GET',
+                            headers: {
+                                'Authorization': `Bearer ${token}`
+                            },
+                        });
+    
+                        if (!response.ok) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'Ocurrió un error cargando los proyectos.'
+                            })
+                        } else {
+                            const data = await response.json();
+                            setProjects(data);
+                        }
+                    } catch (e) {
                         Swal.fire({
-                            icon: 'error',
+                            icon: 'warning',
                             title: 'Error',
                             text: 'Ocurrió un error cargando los proyectos.'
                         })
-                    } else {
-                        const data = await response.json();
-                        setProjects(data);
                     }
-                } catch (e) {
-                    Swal.fire({
-                        icon: 'warning',
-                        title: 'Error',
-                        text: 'Ocurrió un error cargando los proyectos.'
-                    })
                 }
+                fetchProjects();
             }
-            fetchProjects();
         }
     }, [navigate, reload, token]);
 

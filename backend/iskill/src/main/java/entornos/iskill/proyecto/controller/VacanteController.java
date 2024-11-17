@@ -92,6 +92,18 @@ public class VacanteController {
             .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+        /**
+     * Se obtienen las vacantes de un usuario
+     * 
+     * @param id id del usuario
+     * @return lista de proyectos
+     */
+    @GetMapping("/proyecto_id/{id}")
+    @SecurityRequirement(name = "bearerAuth")
+    public List<Vacante> getVacantesByProyectoId(@PathVariable Long id) {
+        return VacanteService.getVacantesByProyectoId(id);
+    }
+
     /**
      * Devuelve la cantidad de registros de un proyecto según el estado
      * 

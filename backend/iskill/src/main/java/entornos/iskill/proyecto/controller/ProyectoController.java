@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import entornos.iskill.proyecto.model.Proyecto;
 import entornos.iskill.proyecto.service.ProyectoService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-import entornos.iskill.proyecto.model.Proyecto;
 
 
 @RestController
@@ -25,9 +25,9 @@ public class ProyectoController {
     ProyectoService ProyectoService;
 
     /**
-     * Se obtiene la lista de tipos de usuario
+     * Se obtiene la lista de proyectos
      * 
-     * @return lista de tipos de usuario
+     * @return lista de proyectos
      */
     @GetMapping("/list")
     @SecurityRequirement(name = "bearerAuth")
@@ -36,10 +36,10 @@ public class ProyectoController {
     }
 
     /**
-     * Se obtiene un tipo de usuario por su id
+     * Se obtiene un proyecto por su id
      * 
-     * @param id id del tipo de usuario
-     * @return tipo de usuario
+     * @param id id del proyecto
+     * @return proyecto
      */
     @GetMapping("/{id}")
     @SecurityRequirement(name = "bearerAuth")
@@ -50,10 +50,10 @@ public class ProyectoController {
     }
 
     /**
-     * Se crea un nuevo tipo de usuario
+     * Se crea un nuevo proyecto
      * 
-     * @param Proyecto tipo de usuario a crear
-     * @return tipo de usuario creado
+     * @param Proyecto proyecto a crear
+     * @return proyecto creado
      */
     @PostMapping
     @SecurityRequirement(name = "bearerAuth")
@@ -62,10 +62,10 @@ public class ProyectoController {
     }
 
     /**
-     * Se actualiza un tipo de usuario
+     * Se actualiza un proyecto
      * 
-     * @param Proyecto tipo de usuario a actualizar
-     * @return tipo de usuario actualizado
+     * @param Proyecto proyecto a actualizar
+     * @return proyecto actualizado
      */
     @PutMapping
     @SecurityRequirement(name = "bearerAuth")
@@ -76,10 +76,10 @@ public class ProyectoController {
     }
 
     /**
-     * Se elimina un tipo de usuario
+     * Se elimina un proyecto
      * 
-     * @param id id del tipo de usuario a eliminar
-     * @return tipo de usuario eliminado
+     * @param id id del proyecto a eliminar
+     * @return proyecto eliminado
      */
     @DeleteMapping("/{id}")
     @SecurityRequirement(name = "bearerAuth")
@@ -92,6 +92,12 @@ public class ProyectoController {
             .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    /**
+     * Se obtienen los proyectos de un usuario
+     * 
+     * @param id id del usuario
+     * @return lista de proyectos
+     */
     @GetMapping("/usuario_id/{id}")
     @SecurityRequirement(name = "bearerAuth")
     public List<Proyecto> getProyectosByUsuarioId(@PathVariable Long id) {
