@@ -4,6 +4,8 @@ import './App.css';
 import Login from './pages/auth/login';
 import CreateProyect from './pages/employer/createProject';
 import ListProjects from './pages/employer/listProjects';
+import ListVacancies from './pages/employer/listVacancies';
+import CreateVacant from './pages/employer/createVacant';
 
 function App() {
   return (
@@ -13,6 +15,8 @@ function App() {
           <Route path="/" element={<Login/>} />
           <Route path="/employer/create-project" element={<CreateProyect/>} />
           <Route path="/employer/my-projects" element={<ListProjects/>} />
+          <Route path="/employer/create-vacant" element={<CreateVacant/>} />
+          <Route path="/employer/my-vacancies" element={<ListVacancies/>} />
         </Routes>
       </Router>
     </Fragment>

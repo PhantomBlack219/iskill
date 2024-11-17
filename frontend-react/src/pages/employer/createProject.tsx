@@ -4,32 +4,6 @@ import Navbar from '../../components/navbar';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
-interface TipoUsuario {
-    tipo_usuario_id: number;
-    nombre: string;
-    descripcion: string;
-}
-
-interface Usuario {
-    usuario_id: number;
-    tipo_usuario_id: TipoUsuario;
-    nombre: string;
-    apellido: string;
-    email: string;
-    usuario: string;
-    password: string;
-    fecha_registro: Date;
-    logros: string;
-    objetivos_carrera: string;
-}
-
-interface Proyecto {
-    proyecto_id: number;
-    usuario_id: Usuario;
-    nombre: string;
-    descripcion: string;
-}
-
 const CreateProyect = () => {
     const location = useLocation();
     const navigate = useNavigate();
@@ -118,19 +92,16 @@ const CreateProyect = () => {
             }
         });
     }
-
-
-    const createProject = async () => {
-        
-    }
-
-
+    
     return (
         <div className='wrapper'>
             <Navbar></Navbar>
             <Sidebar></Sidebar>
             <div className='content-wrapper'>
                 <div className="main-content">
+                    <div className="gap-div justify-content-center">
+                        <p className="bold-title">Creación y Edición de Proyectos</p>
+                    </div>
                     <div className="content-section">
                         <div className="card custom-card project-form">
                             <div className="card-body">
