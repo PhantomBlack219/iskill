@@ -49,13 +49,13 @@ interface Vacante {
     fecha_fin: Date;
 }
 
-type VacancyCounts = Record<string, {postulaciones: number, seleccionados: number}>;
+type vacantCounts = Record<string, {postulaciones: number, seleccionados: number}>;
 
 const ListVacancies = () => {
     const navigate = useNavigate();
 
     const [vacancies, setVacancies] = useState<Vacante[]>([]);
-    const [vacancyCounts, setVacancyCounts] = useState<VacancyCounts>({});
+    const [vacantCounts, setvacantCounts] = useState<vacantCounts>({});
     const [reload, setReload] = useState(false);
 
     const token = localStorage.getItem('jwtToken');
@@ -82,7 +82,7 @@ const ListVacancies = () => {
             } else {
                 const fetchVacancies = async () => {
                     try {
-                        const response = await fetch(`${process.env.REACT_APP_PUBLIC_HOST}/api/vacante/list`, {
+                        const response = await fetch(`${process.env.REACT_APP_PUBLIC_HOST}/api/vacante/usuario_id/${usuarioJSON.usuario_id}`, {
                             method: 'GET',
                             headers: {
                                 'Authorization': `Bearer ${token}`
@@ -161,18 +161,18 @@ const ListVacancies = () => {
         }
     }
 
-    const editVacante = (vacancy: Vacante) => {
+    const editVacante = (vacant: Vacante) => {
         navigate(
-            '/employer/create-vacancy',
+            '/employer/create-vacant',
             {
-                state: { vacancy: vacancy }
+                state: { vacant: vacant }
             }
         )
     }
 
     const fetchCountPostulacion = async () => {
         try {
-            const counts: VacancyCounts = {}
+            const counts: vacantCounts = {}
 
             await Promise.all(
                 vacancies.map(async (vacante) => {
@@ -205,7 +205,7 @@ const ListVacancies = () => {
                 })
             )
             console.log(counts);
-            setVacancyCounts(counts);
+            setvacantCounts(counts);
         } catch (e) {
             Swal.fire({
                 icon: 'error',
@@ -229,7 +229,7 @@ const ListVacancies = () => {
                     <div className="gap-div">
                         <p className="bold-title">Mis Vacantes</p>
                         <div className="gap-div-2">
-                            <Link to={"#"}>
+                            <Link to={"/employer/create-vacant"}>
                                 <img src="/images/crear.png" alt="Icono Crear" className="create-icon" />
                             </Link>
                             <div><p className="bold-title">Crear Vacantes</p></div>
@@ -273,11 +273,11 @@ const ListVacancies = () => {
                                             </div>
                                             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                                 <p style={{ paddingRight: '1rem' }}>Aplicaciones: </p>
-                                                <p className="bold-text">{vacancyCounts[vacante.vacante_id]?.postulaciones ?? 'Cargando...'}</p>
+                                                <p className="bold-text">{vacantCounts[vacante.vacante_id]?.postulaciones ?? 'Cargando...'}</p>
                                             </div>
                                             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                                 <p style={{ paddingRight: '1rem' }}>Seleccionados: </p>
-                                                <p className="bold-text">{vacancyCounts[vacante.vacante_id]?.seleccionados ?? 'Cargando...'}</p>
+                                                <p className="bold-text">{vacantCounts[vacante.vacante_id]?.seleccionados ?? 'Cargando...'}</p>
                                             </div>
                                         </div>
                                         <div style={{ display: 'flex', justifyContent: 'center' }} className="card-actions">

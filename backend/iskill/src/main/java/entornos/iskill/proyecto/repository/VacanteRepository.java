@@ -18,4 +18,7 @@ public interface VacanteRepository extends JpaRepository<Vacante, Long> {
 
     @Query("SELECT COUNT(*) FROM Vacante v WHERE v.vacante_id = :id")
     Long countVacantesByVacanteId(@Param("id") Long id);
+
+    @Query("SELECT v FROM Vacante v WHERE v.proyecto_id.usuario_id.usuario_id = :id")
+    List<Vacante> getVacantesByUsuarioId(@Param("id") Long id);
 }

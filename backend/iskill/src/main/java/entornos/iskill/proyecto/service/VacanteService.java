@@ -48,6 +48,11 @@ public class VacanteService implements IVacanteService {
     }
 
     @Override
+    public List<Vacante> getVacantesByUsuarioId(Long id){
+        return VacanteRepository.getVacantesByUsuarioId(id);
+    }
+
+    @Override
     public Long countVacantesByEstadoAndVacanteId(EstadoVacante estado, Long id){
         return VacanteRepository.countVacantesByEstadoAndVacanteId(estado, id);
     }

@@ -18,6 +18,7 @@ import entornos.iskill.proyecto.model.Vacante;
 import entornos.iskill.proyecto.service.VacanteService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
+
 @RestController
 @RequestMapping("/api/vacante")
 public class VacanteController {
@@ -92,8 +93,8 @@ public class VacanteController {
             .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-        /**
-     * Se obtienen las vacantes de un usuario
+    /**
+     * Se obtienen las vacantes de un proyecto
      * 
      * @param id id del usuario
      * @return lista de proyectos
@@ -103,6 +104,18 @@ public class VacanteController {
     public List<Vacante> getVacantesByProyectoId(@PathVariable Long id) {
         return VacanteService.getVacantesByProyectoId(id);
     }
+
+    /**
+     * Se obtienen las vacantes de un usuario
+     * 
+     * @param id id del usuario
+     * @return lista de proyectos
+     */
+    @GetMapping("/usuario_id/{id}")
+    public List<Vacante> getVacantesByUsuarioId(@PathVariable Long id) {
+        return VacanteService.getVacantesByUsuarioId(id);
+    }
+    
 
     /**
      * Devuelve la cantidad de registros de un proyecto según el estado

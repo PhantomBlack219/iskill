@@ -19,6 +19,8 @@ public interface IVacanteService {
 
     List<Vacante> getVacantesByProyectoId(Long id);
 
+    List<Vacante> getVacantesByUsuarioId(Long id);
+
     Long countVacantesByEstadoAndVacanteId(EstadoVacante estado, Long id);
 
     Long countVacantesByVacanteId(Long id);

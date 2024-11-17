@@ -7,6 +7,7 @@ import ListProjects from './pages/employer/listProjects';
 import ListVacancies from './pages/employer/listVacancies';
 import CreateVacant from './pages/employer/createVacant';
 import Register from './pages/auth/register';
+import ListProjectsAdmin from './pages/admin/listProjects';
 
 function App() {
   return (
@@ -19,6 +20,12 @@ function App() {
             <Route path="my-projects" element={<ListProjects/>} />
             <Route path="create-project" element={<CreateProyect/>} />
             <Route path="my-vacancies" element={<ListVacancies/>} />
+            <Route path="create-vacant" element={<CreateVacant/>} />
+          </Route>
+          <Route path="admin">
+            <Route path="all-projects" element={<ListProjectsAdmin/>} />
+            <Route path="create-project" element={<CreateProyect/>} />
+            <Route path="all-vacancies" element={<ListVacancies/>} />
             <Route path="create-vacant" element={<CreateVacant/>} />
           </Route>
         </Routes>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Navbar from '../../components/navbar';
 import Sidebar from '../../components/sidebar';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { EnumType } from 'typescript';
 
 interface TipoUsuario {
@@ -44,54 +44,54 @@ interface Vacante {
 
 const CreateVacant = () => {
     const navigate = useNavigate();
+    const location = useLocation();
 
-    const [vacancies, setVacancies] = useState<Vacante[]>([]);
     const [reload, setReload] = useState(false);
 
     const token = localStorage.getItem('jwtToken');
+    const usuario = localStorage.getItem('usuario');
+
+    const usuarioJSON = usuario ? JSON.parse(usuario) : null;
 
 
-    return ( 
+    return (
         <div className='wrapper'>
             <Navbar></Navbar>
             <Sidebar></Sidebar>
 
             <div className='content-wrapper'>
                 <div className="main-content">
-                    <div className="gap-div">
-                        <p className="bold-title">Mis Vacantes</p>
-                        <div style={{ display: 'flex', justifyContent: 'center' }} className="gap-div-2">
-                            <Link to={"/employer/create-project"}>
-                                <img src="/images/crear.png" alt="Icono Crear" className="create-icon" />
-                            </Link>
-                            <div><p className="bold-title">Crear Vacante</p></div>
-                        </div>
+                    <div className="gap-div justify-content-center">
+                        <p className="bold-title">Creación y Edición de Vacantes</p>
                     </div>
 
                     <div className="content-section">
-                        {
-                            vacancies.map((vacant) => (
-                                <div className="card custom-card" key={vacant.vacante_id}>
-                                    <div className="card-body">
-                                        <div className="card-top">
-                                            <div className="card-title-section">
-                                                <p className="card-title">{vacant.nombre}</p>
-                                                <p className="card-subtitle">{vacant.descripcion}</p>
-                                            </div>
+                        <div className="card custom-card project-form">
+                            <div className="card-body">
+                                <div className="card-top">
+                                    <form id="project-form" onSubmit={(e) => {}}>
+                                        <div className="mb-3">
+                                            <label htmlFor="nombre" className="form-label fw-bold">Nombre del Proyecto</label>
+                                            <input type="text" id="nombre" name="nombre" className="form-control" placeholder="Ingresa el nombre del proyecto" required  />
                                         </div>
-                                        <div style={{ display: 'flex', justifyContent: 'center' }} className="card-actions">
-                                            <button className="btn btn-primary btn-custom" >Editar</button>
-                                            <button className="btn btn-danger" >Eliminar</button>
+                                        <div className="mb-3">
+                                            <label htmlFor="password" className="form-label fw-bold">Descripción del Proyecto</label>
+                                            <textarea id="descripcion" name="descripcion" className="form-control" rows={3} placeholder="Ingresa una descripción del proyecto" required  />
                                         </div>
-                                    </div>
+
+                                        <div className="d-flex justify-content-center gap-3 mt-4">
+                                            <button className="btn btn-primary btn-custom" type='submit'>Guardar</button>
+                                            <Link to={"/employer/my-projects"} type="button" className="btn btn-danger">Cancelar</Link>
+                                        </div>
+                                    </form>
                                 </div>
-                            ))
-                        }
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-     );
+    );
 }
- 
+
 export default CreateVacant;

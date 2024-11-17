@@ -90,36 +90,70 @@ const Register = () => {
 
     const register = async () => {
         try {
-            usuario.fecha_registro = new Date();
-
-            const response = await fetch(`${process.env.REACT_APP_PUBLIC_HOST}/auth/register`, {
-                method: 'POST',
+            const response = await fetch(`${process.env.REACT_APP_PUBLIC_HOST}/api/usuario/check_usuario/${usuario.usuario}`, {
+                method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(usuario)
+                }
             });
 
             if (!response.ok) {
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
-                    text: 'Error al registrar usuario.'
+                    text: 'Error verificando el nombre de usuario.'
                 });
+                return;
             } else {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Usuario registrado',
-                    text: 'Usuario registrado exitosamente.'
-                }).then(() => {
-                    navigate('/');
-                });
+                const data = await response.json();
+                if (data === false) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'El nombre de usuario ya existe. Por favor, elige otro.'
+                    });
+                    return;
+                } else {
+                    try {
+                        usuario.fecha_registro = new Date();
+
+                        const response = await fetch(`${process.env.REACT_APP_PUBLIC_HOST}/auth/register`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(usuario)
+                        });
+
+                        if (!response.ok) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'Error al registrar usuario.'
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Usuario registrado',
+                                text: 'Usuario registrado exitosamente.'
+                            }).then(() => {
+                                navigate('/');
+                            });
+                        }
+                    } catch (e) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Error al registrar usuario.'
+                        });
+                    }
+                }
             }
         } catch (e) {
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
-                text: 'Error al registrar usuario.'
+                text: 'Error verificando el nombre de usuario.'
             });
         }
     };

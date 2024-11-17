@@ -55,7 +55,13 @@ const Login = () => {
                     localStorage.setItem('usuario', JSON.stringify(data.usuario));
 
                     // TODO: redirect based on role
-                    navigate("/employer/my-projects");
+                    if(data.usuario.tipo_usuario_id.tipo_usuario_id === 1){
+                        navigate("/admin/all-projects");
+                    } else if(data.usuario.tipo_usuario_id.tipo_usuario_id === 2){
+                        navigate("/employer/my-projects");
+                    } else if(data.usuario.tipo_usuario_id.tipo_usuario_id === 3){
+                        navigate("/employee/my-projects");
+                    }
                 }
             } catch (e) {
                 Swal.fire({
