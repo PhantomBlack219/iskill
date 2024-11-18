@@ -55,7 +55,7 @@ const ListVacancies = () => {
     const navigate = useNavigate();
 
     const [vacancies, setVacancies] = useState<Vacante[]>([]);
-    const [vacantCounts, setvacantCounts] = useState<vacantCounts>({});
+    const [vacantCounts, setVacantCounts] = useState<vacantCounts>({});
     const [reload, setReload] = useState(false);
 
     const token = localStorage.getItem('jwtToken');
@@ -111,8 +111,13 @@ const ListVacancies = () => {
                 fetchVacancies();
             }
         }
-        fetchCountPostulacion();
     }, [navigate, reload, token]);
+
+    useEffect(() => {
+        if(vacancies.length > 0){
+            fetchCountPostulacion();
+        }
+    }, [vacancies]);
 
     const deleteVacante = async (id: number) => {
         try {
@@ -205,7 +210,7 @@ const ListVacancies = () => {
                     }
                 })
             )
-            setvacantCounts(counts);
+            setVacantCounts(counts);
         } catch (e) {
             Swal.fire({
                 icon: 'error',

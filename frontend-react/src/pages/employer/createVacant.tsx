@@ -2,9 +2,7 @@ import React, { FormEvent, useEffect, useState } from 'react';
 import Navbar from '../../components/navbar';
 import Sidebar from '../../components/sidebar';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { EnumType } from 'typescript';
 import Swal from 'sweetalert2';
-import { Icon } from '@iconify/react';
 
 interface Habilidad {
     habilidad_id: number;
@@ -53,12 +51,6 @@ interface Vacante {
     estado: EstadoVacante;
     fecha_inicio: Date;
     fecha_fin: Date;
-}
-
-interface HabilidadVacante {
-    habilidad_vacante_id: number;
-    habilidad_id: Habilidad;
-    vacante_id: Vacante;
 }
 
 const CreateVacant = () => {
@@ -200,8 +192,6 @@ const CreateVacant = () => {
                                 habilidad: { habilidad_id: habilidad },
                                 vacante: { vacante_id: data.vacante_id }
                             })));
-
-                            console.log(json);
 
                             const habilidadesResponse = await fetch('http://localhost:9000/api/habilidad_vacante/createHabilidades', {
                                 method: 'POST',

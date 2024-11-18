@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { Icon } from '@iconify/react';
 
 const AdminSidebar = () => {
     const location = useLocation();
@@ -39,6 +40,12 @@ const AdminSidebar = () => {
                             width={30}
                             height={30}
                         /> Dashboard
+                    </Link>
+                </li>
+                <li className={`nav-item ${isActive("/admin/all-users") ? "active" : ""}`}>
+                    <Link className="nav-link" to={"/admin/all-users"}>
+                        <Icon icon="mdi:users" color='#404c54' className="nav-icon" width={30} height={30} />
+                        Todos los Usuarios
                     </Link>
                 </li>
                 <li className={`nav-item ${isActive("/admin/all-projects") ? "active" : ""}`}>

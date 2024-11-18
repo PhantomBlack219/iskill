@@ -9,6 +9,8 @@ import CreateVacant from './pages/employer/createVacant';
 import Register from './pages/auth/register';
 import ListProjectsAdmin from './pages/admin/listProjectsAdmin';
 import ListVacanciesAdmin from './pages/admin/listVacanciesAdmin';
+import ListUsersAdmin from './pages/admin/listUsersAdmin';
+import CreateUserAdmin from './pages/admin/createUserAdmin';
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
             <Route path="create-project" element={<CreateProyect/>} />
             <Route path="all-vacancies" element={<ListVacanciesAdmin/>} />
             <Route path="create-vacant" element={<CreateVacant/>} />
+            <Route path="all-users" element={<ListUsersAdmin/>} />
+            <Route path='create-user' element={<CreateUserAdmin/>}/>
           </Route>
         </Routes>
       </Router>
