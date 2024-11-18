@@ -47,4 +47,9 @@ public class HabilidadVacanteService implements IHabilidadVacanteService {
         return habilidadVacanteRepository.saveAll(habilidadesVacante);
     }
 
+    @Override
+    public List<HabilidadVacante> findByVacanteId(Long vacanteId) {
+        return habilidadVacanteRepository.findByVacanteId(vacanteId);
+    }
+
 }

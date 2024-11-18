@@ -28,7 +28,11 @@ const Register = () => {
     const [tipoUsuarios, setTipoUsuarios] = useState<TipoUsuario[]>([]);
     const [usuario, setUsuario] = useState<Usuario>({
         usuario_id: 0,
-        tipo_usuario_id: { tipo_usuario_id: 0, nombre: '', descripcion: '' },
+        tipo_usuario_id: {
+            tipo_usuario_id: 0, 
+            nombre: '', 
+            descripcion: ''
+        },
         nombre: '',
         apellido: '',
         email: '',
@@ -41,6 +45,7 @@ const Register = () => {
     const [formData, setFormData] = useState({ password: '', confirm_password: '' });
 
     useEffect(() => {
+        document.title = 'Registro | iSkill';
         const fetchTipoUsuarios = async () => {
             try {
                 const response = await fetch(`${process.env.REACT_APP_PUBLIC_HOST}/api/tipo_usuario/list`);
@@ -288,7 +293,7 @@ const Register = () => {
                                             onChange={(e) => { onTipoUsuarioChange(e) }}
                                             required
                                         >
-                                            <option value="">Seleccionar tipo de Usuario</option>
+                                            <option value="">Seleccionar tipo de Usuario...</option>
                                             {
                                                 tipoUsuarios.map((tipo) => (
                                                     <option key={tipo.tipo_usuario_id} value={tipo.tipo_usuario_id}>

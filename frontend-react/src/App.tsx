@@ -7,7 +7,8 @@ import ListProjects from './pages/employer/listProjects';
 import ListVacancies from './pages/employer/listVacancies';
 import CreateVacant from './pages/employer/createVacant';
 import Register from './pages/auth/register';
-import ListProjectsAdmin from './pages/admin/listProjects';
+import ListProjectsAdmin from './pages/admin/listProjectsAdmin';
+import ListVacanciesAdmin from './pages/admin/listVacanciesAdmin';
 
 function App() {
   return (
@@ -25,7 +26,7 @@ function App() {
           <Route path="admin">
             <Route path="all-projects" element={<ListProjectsAdmin/>} />
             <Route path="create-project" element={<CreateProyect/>} />
-            <Route path="all-vacancies" element={<ListVacancies/>} />
+            <Route path="all-vacancies" element={<ListVacanciesAdmin/>} />
             <Route path="create-vacant" element={<CreateVacant/>} />
           </Route>
         </Routes>

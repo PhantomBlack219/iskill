@@ -8,6 +8,10 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import entornos.iskill.habilidad.model.HabilidadUsuario;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,6 +19,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 
@@ -61,6 +66,10 @@ public class Usuario implements UserDetails {
 
     @Column
     private String objetivos_carrera;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<HabilidadUsuario> habilidadesUsuario;
 
     // Constructors
 
@@ -201,6 +210,14 @@ public class Usuario implements UserDetails {
         return "Usuario {id=" + usuario_id + ", tipousuario_id=" + tipo_usuario_id + ", nombre=" + nombre + ", apellido="
                 + apellido + ", email=" + email + ", usuario=" + usuario + ", password=" + password + ", fecha_registro="
                 + fecha_registro + ", logros=" + logros + ", objetivos_carrera=" + objetivos_carrera + "}";
+    }
+
+    public List<HabilidadUsuario> getHabilidadesUsuario() {
+        return habilidadesUsuario;
+    }
+
+    public void setHabilidadesUsuario(List<HabilidadUsuario> habilidadesUsuario) {
+        this.habilidadesUsuario = habilidadesUsuario;
     }
 
 }

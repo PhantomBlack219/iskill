@@ -1,5 +1,7 @@
 package entornos.iskill.habilidad.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import entornos.iskill.usuario.model.Usuario;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,6 +27,7 @@ public class HabilidadUsuario {
     @ManyToOne
     @JoinColumn(name = "usuario_id")
     @NotNull
+    @JsonBackReference
     private Usuario usuario;
 
     // Constructors

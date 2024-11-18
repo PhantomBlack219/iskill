@@ -1,5 +1,7 @@
 package entornos.iskill.habilidad.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import entornos.iskill.proyecto.model.Vacante;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,6 +27,7 @@ public class HabilidadVacante {
     @ManyToOne
     @JoinColumn(name = "vacante_id")
     @NotNull
+    @JsonBackReference
     private Vacante vacante;
 
     // Constructors

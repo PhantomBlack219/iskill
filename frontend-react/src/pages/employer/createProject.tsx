@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import Sidebar from '../../components/sidebar';
 import Navbar from '../../components/navbar';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -14,13 +14,17 @@ const CreateProyect = () => {
     const usuarioJSON = usuario ? JSON.parse(usuario) : null;
     
     const [project, setProject] = useState(location.state?.project || {
-        proyecto_id: '',
+        proyecto_id: 0,
         usuario_id: usuario ? { usuario_id: usuarioJSON.usuario_id } : '',
         nombre: '',
         descripcion: ''
     });
 
     const { proyecto_id, usuario_id, nombre, descripcion } = project;
+
+    useEffect(() => {
+        document.title = 'Crear Proyecto | iSkill';
+    }, []);
 
     const onChange = (e: any) => {
         setProject({
@@ -52,7 +56,7 @@ const CreateProyect = () => {
                         confirmButtonColor: '#00667F'
                     });
                 } else {
-                    const requestMethod = proyecto_id === '' ? 'POST' : 'PUT';
+                    const requestMethod = proyecto_id === 0 ? 'POST' : 'PUT';
                     try {
                         const response = await fetch(`${process.env.REACT_APP_PUBLIC_HOST}/api/proyecto`, {
                             method: requestMethod,
@@ -67,7 +71,7 @@ const CreateProyect = () => {
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Error',
-                                text: 'Ocurrió un error guardando el proyecto.',
+                                text: 'Ocurrió un error guardando el proyecto. Inténtalo de nuevo.',
                                 confirmButtonColor: '#00667F'
                             })
                         } else {
@@ -84,7 +88,7 @@ const CreateProyect = () => {
                         Swal.fire({
                             icon: 'error',
                             title: 'Error',
-                            text: 'Ocurrió un error guardando el proyecto.',
+                            text: 'Ocurrió un error guardando el proyecto. Inténtalo de nuevo.',
                             confirmButtonColor: '#00667F'
                         })
                     }

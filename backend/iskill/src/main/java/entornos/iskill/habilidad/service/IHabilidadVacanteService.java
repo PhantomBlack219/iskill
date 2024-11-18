@@ -17,4 +17,6 @@ public interface IHabilidadVacanteService {
     void delete(Long id);
 
     List<HabilidadVacante> createHabilidadesVacante(List<HabilidadVacante> habilidadesVacante);
+
+    List<HabilidadVacante> findByVacanteId(Long vacanteId);
 }

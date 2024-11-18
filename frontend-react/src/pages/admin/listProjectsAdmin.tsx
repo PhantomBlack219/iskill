@@ -46,6 +46,7 @@ const ListProjectsAdmin = () => {
     const usuarioJSON = usuario ? JSON.parse(usuario) : null;
 
     useEffect(() => {
+        document.title = 'Proyectos | iSkill | Admin';
         if (decodedToken !== null) {
             let currentDate = new Date();
             if (decodedToken.exp && decodedToken.exp * 1000 < currentDate.getTime()) {

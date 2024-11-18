@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { Icon } from '@iconify/react';
@@ -12,6 +12,9 @@ const Login = () => {
     });
 
     const { usuario, password } = user;
+    useEffect(() => {
+        document.title = 'iSkill';
+    }, []);
 
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
         setUser({
@@ -54,7 +57,6 @@ const Login = () => {
                     localStorage.setItem('jwtToken', data.token);
                     localStorage.setItem('usuario', JSON.stringify(data.usuario));
 
-                    // TODO: redirect based on role
                     if(data.usuario.tipo_usuario_id.tipo_usuario_id === 1){
                         navigate("/admin/all-projects");
                     } else if(data.usuario.tipo_usuario_id.tipo_usuario_id === 2){

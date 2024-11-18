@@ -1,7 +1,12 @@
 package entornos.iskill.proyecto.model;
 
 import java.sql.Date;
+import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import entornos.iskill.habilidad.model.HabilidadVacante;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -11,6 +16,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 
@@ -52,6 +58,10 @@ public class Vacante {
 
     @Column
     private Date fecha_fin;
+
+    @OneToMany(mappedBy = "vacante", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<HabilidadVacante> habilidadesVacantes;
 
 
     // Constructors
@@ -155,5 +165,13 @@ public class Vacante {
 
     public void setFecha_fin(Date fecha_fin) {
         this.fecha_fin = fecha_fin;
+    }
+
+    public List<HabilidadVacante> getHabilidadesVacantes() {
+        return habilidadesVacantes;
+    }
+
+    public void setHabilidadesVacantes(List<HabilidadVacante> habilidadesVacantes) {
+        this.habilidadesVacantes = habilidadesVacantes;
     }
 }

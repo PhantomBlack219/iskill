@@ -42,7 +42,7 @@ const AdminSidebar = () => {
                     </Link>
                 </li>
                 <li className={`nav-item ${isActive("/admin/all-projects") ? "active" : ""}`}>
-                    <Link className="nav-link" to={"/employer/all-projects"}>
+                    <Link className="nav-link" to={"/admin/all-projects"}>
                         <img
                             src="/images/misProyectos.png"
                             alt="Icono Desafíos"
@@ -53,7 +53,7 @@ const AdminSidebar = () => {
                     </Link>
                 </li>
                 <li className={`nav-item ${isActive("/admin/all-vacancies") ? "active" : ""}`}>
-                    <Link className="nav-link" to={"/employer/all-vacancies"}>
+                    <Link className="nav-link" to={"/admin/all-vacancies"}>
                         <img
                             src="/images/misProyectos.png"
                             alt="Icono Desafíos"

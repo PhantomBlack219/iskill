@@ -98,4 +98,10 @@ public class HabilidadVacanteController {
     public ResponseEntity<?> addMultipleHabilidadesVacante(@RequestBody List<HabilidadVacante> habilidadesVacanteList){
         return new ResponseEntity<>(habilidadVacanteService.createHabilidadesVacante(habilidadesVacanteList), HttpStatus.OK);
     }
+
+    @GetMapping("/vacante/{vacanteId}")
+    @SecurityRequirement(name = "bearerAuth")
+    public ResponseEntity<?> getHabilidadesByVacanteId(@PathVariable Long vacanteId){
+        return new ResponseEntity<>(habilidadVacanteService.findByVacanteId(vacanteId), HttpStatus.OK);
+    }
 }

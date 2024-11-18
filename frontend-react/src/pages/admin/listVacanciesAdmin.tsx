@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../../components/navbar';
-import Sidebar from '../../components/sidebar';
 import { Link, useNavigate } from 'react-router-dom';
 import { jwtDecode, JwtPayload } from 'jwt-decode';
 import Swal from 'sweetalert2';
+import AdminSidebar from '../../components/adminSidebar';
 
 enum EstadoVacante {
     BUSCANDO,
@@ -51,7 +51,7 @@ interface Vacante {
 
 type vacantCounts = Record<string, {postulaciones: number, seleccionados: number}>;
 
-const ListVacancies = () => {
+const ListVacanciesAdmin = () => {
     const navigate = useNavigate();
 
     const [vacancies, setVacancies] = useState<Vacante[]>([]);
@@ -66,7 +66,7 @@ const ListVacancies = () => {
     const usuarioJSON = usuario ? JSON.parse(usuario) : null;
 
     useEffect(() => {
-        document.title = 'Mis Vacantes | iSkill';
+        document.title = 'Vacantes | iSkill | Admin';
         if (decodedToken !== null) {
             let currentDate = new Date();
             if (decodedToken.exp && decodedToken.exp * 1000 < currentDate.getTime()) {
@@ -83,7 +83,7 @@ const ListVacancies = () => {
             } else {
                 const fetchVacancies = async () => {
                     try {
-                        const response = await fetch(`${process.env.REACT_APP_PUBLIC_HOST}/api/vacante/usuario_id/${usuarioJSON.usuario_id}`, {
+                        const response = await fetch(`${process.env.REACT_APP_PUBLIC_HOST}/api/vacante/list`, {
                             method: 'GET',
                             headers: {
                                 'Authorization': `Bearer ${token}`
@@ -205,6 +205,7 @@ const ListVacancies = () => {
                     }
                 })
             )
+            console.log(counts);
             setvacantCounts(counts);
         } catch (e) {
             Swal.fire({
@@ -222,12 +223,12 @@ const ListVacancies = () => {
     return (
         <div className='wrapper'>
             <Navbar></Navbar>
-            <Sidebar></Sidebar>
+            <AdminSidebar></AdminSidebar>
 
             <div className='content-wrapper'>
                 <div className='main-content'>
                     <div className="gap-div">
-                        <p className="bold-title">Mis Vacantes</p>
+                        <p className="bold-title">Todas las Vacantes</p>
                         <div className="gap-div-2">
                             <Link to={"/employer/create-vacant"}>
                                 <img src="/images/crear.png" alt="Icono Crear" className="create-icon" />
@@ -262,8 +263,12 @@ const ListVacancies = () => {
                                         </div>
                                         <div className="card-extra">
                                             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                                <p style={{ paddingRight: '1rem' }}>Proyecto:</p>
+                                                <p style={{ paddingRight: '' }}>Proyecto:</p>
                                                 <p className="gray-text">{vacante.proyecto_id.nombre}</p>
+                                            </div>
+                                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                                <p style={{ paddingRight: '1rem' }}>Creado por:</p>
+                                                <p className="gray-text">{vacante.proyecto_id.usuario_id.nombre}</p>
                                             </div>
                                         </div>
                                         <div className="card-extra">
@@ -296,4 +301,4 @@ const ListVacancies = () => {
     );
 }
 
-export default ListVacancies;
+export default ListVacanciesAdmin;
