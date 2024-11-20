@@ -54,17 +54,7 @@ const Sidebar = () => {
                         /> Mis postulaciones
                     </Link>
                 </li>
-                <li className={`nav-item ${isActive("/employer/my-vacancies") ? "active" : ""}`}>
-                    <Link className="nav-link" to={"/employer/my-vacancies"}>
-                        <img
-                            src="/images/misProyectos.png"
-                            alt="Icono Desafíos"
-                            className="nav-icon"
-                            width={30}
-                            height={30}
-                        /> Proyectos
-                    </Link>
-                </li>
+
                 <li className={`nav-item ${isActive("#") ? "active" : ""}`}>
                     <Link className="nav-link" to={"#"}>
                         <img

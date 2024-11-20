@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../../components/navbar';
 import Sidebar from '../../components/sidebarEmployee';
-import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 interface Vacante {
@@ -39,7 +38,7 @@ const UserApplications = () => {
 
     const fetchPostulaciones = async () => {
         try {
-            console.log("Fetching todas las postulaciones...");
+
             const response = await fetch('http://localhost:9000/api/postulacion/list', {
                 headers: {
                     'Content-Type': 'application/json',
@@ -49,11 +48,10 @@ const UserApplications = () => {
 
             if (response.ok) {
                 const data = await response.json();
-                console.log("Postulaciones obtenidas:", data);
 
                 
                 const postulacionesUsuario = data.filter((postulacion: Postulacion) => postulacion.usuario_id.usuario_id === usuarioJSON?.usuario_id);
-                console.log("Postulaciones filtradas para el usuario:", postulacionesUsuario);
+                
                 
                 setPostulaciones(postulacionesUsuario);
             } else {
@@ -64,7 +62,7 @@ const UserApplications = () => {
                 });
             }
         } catch (error) {
-            console.log("Error al obtener postulaciones:", error);
+           
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
@@ -111,12 +109,24 @@ const UserApplications = () => {
                                                 {postulaciones.map((postulacion) => (
                                                     <tr key={postulacion.postulacion_id}>
                                                         <td>{postulacion.vacante_id.nombre}</td>
-                                                        <td>{postulacion.estado}</td>
+                                                        <td>
+                                                            <span
+                                                                style={{
+                                                                    color: 
+                                                                        postulacion.estado === 'APLICADO' ? '#003366' :
+                                                                        postulacion.estado === 'SELECCIONADO' ? '#006400' :
+                                                                        postulacion.estado === 'RECHAZADO' ? '#8B0000' : 'black'
+                                                                }}
+                                                            >
+                                                                {postulacion.estado}
+                                                            </span>
+                                                        </td>
                                                         <td>{new Date(postulacion.fecha_postulacion).toLocaleDateString()}</td>
                                                     </tr>
                                                 ))}
                                             </tbody>
                                         </table>
+
                                     )}
                                 </div>
                             </div>
