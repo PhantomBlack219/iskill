@@ -59,10 +59,10 @@ const Login = () => {
 
                     if(data.usuario.tipo_usuario_id.tipo_usuario_id === 1){
                         navigate("/admin/all-projects");
-                    } else if(data.usuario.tipo_usuario_id.tipo_usuario_id === 4){
+                    } else if(data.usuario.tipo_usuario_id.tipo_usuario_id === 2){
                         navigate("/employer/my-projects");
-                    } else if(data.usuario.tipo_usuario_id.tipo_usuario_id === 5){
-                        navigate("/employee/my-projects");
+                    } else if(data.usuario.tipo_usuario_id.tipo_usuario_id === 3){
+                        navigate("/employee/all-vacancies");
                     }
                 }
             } catch (e) {

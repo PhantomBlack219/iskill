@@ -209,6 +209,7 @@ const ListVacancies = () => {
                     }
                 })
             )
+            console.log(counts);
             setVacantCounts(counts);
         } catch (e) {
             Swal.fire({

@@ -3,6 +3,7 @@ import Navbar from '../../components/navbar';
 import Sidebar from '../../components/sidebar';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import AdminSidebar from '../../components/adminSidebar';
 
 interface Habilidad {
     habilidad_id: number;
@@ -313,10 +314,22 @@ const CreateVacant = () => {
         fetchHabilidades();
     }, []);
 
+    const onCancelButtonPressed = () => {
+        if(usuarioJSON.tipo_usuario_id.tipo_usuario_id === 1) {
+            navigate('/admin/all-vacancies');
+        } else {
+            navigate('/employer/my-vacancies');
+        }
+    }
+
     return (
         <div className='wrapper'>
             <Navbar></Navbar>
-            <Sidebar></Sidebar>
+            {usuarioJSON.tipo_usuario_id.tipo_usuario_id === 1 ? (
+                <AdminSidebar />
+            ) : (
+                <Sidebar />
+            )}
 
             <div className='content-wrapper'>
                 <div className="main-content">
@@ -446,7 +459,7 @@ const CreateVacant = () => {
 
                                         <div className="d-flex justify-content-center gap-3 mt-4">
                                             <button className="btn btn-primary btn-custom" type='submit'>Guardar</button>
-                                            <Link to={"/employer/my-projects"} type="button" className="btn btn-danger">Cancelar</Link>
+                                            <button className="btn btn-danger" onClick={onCancelButtonPressed}>Cancelar</button>
                                         </div>
                                     </form>
                                 </div>

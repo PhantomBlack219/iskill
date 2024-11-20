@@ -71,6 +71,7 @@ const ListVacancies = () => {
     const token = localStorage.getItem('jwtToken');
     const usuario = localStorage.getItem('usuario');
     const usuarioJSON = usuario ? JSON.parse(usuario) : null;
+    const [reload, setReload] = useState(false);
 
     useEffect(() => {
         if (token) {
@@ -91,28 +92,31 @@ const ListVacancies = () => {
                 }
             };
 
-            const fetchPostulaciones = async () => {
-                try {
-                    const response = await fetch(`${process.env.REACT_APP_PUBLIC_HOST}/api/postulacion/list`, {
-                        method: 'GET',
-                        headers: { 'Authorization': `Bearer ${token}` }
-                    });
-                    const data = await response.json();
-                    const postulaciones = data.filter((postulacion: Postulacion) => postulacion.usuario_id.usuario_id === usuarioJSON?.usuario_id);
-                    setPostulacionesUsuario(postulaciones);
-                } catch (error) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'No se pudieron cargar las postulaciones.'
-                    });
-                }
-            };
-
             fetchVacancies();
-            fetchPostulaciones();
         }
-    }, [token, usuarioJSON]);
+    }, [reload]);
+
+    useEffect(() => {
+        const fetchPostulaciones = async () => {
+            try {
+                const response = await fetch(`${process.env.REACT_APP_PUBLIC_HOST}/api/postulacion/list`, {
+                    method: 'GET',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const data = await response.json();
+                const postulaciones = data.filter((postulacion: Postulacion) => postulacion.usuario_id.usuario_id === usuarioJSON?.usuario_id);
+                setPostulacionesUsuario(postulaciones);
+            } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'No se pudieron cargar las postulaciones.'
+                });
+            }
+        };
+
+        fetchPostulaciones();
+    }, [reload]);
 
     const postularse = async (vacante: Vacante) => {
         const alreadyApplied = postulacionesUsuario.some(postulacion => postulacion.vacante_id.vacante_id === vacante.vacante_id);

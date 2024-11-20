@@ -111,8 +111,13 @@ const ListVacanciesAdmin = () => {
                 fetchVacancies();
             }
         }
-        fetchCountPostulacion();
     }, [navigate, reload, token]);
+
+    useEffect(() => {
+        if(vacancies.length > 0){
+            fetchCountPostulacion();
+        }
+    }, [vacancies]);
 
     const deleteVacante = async (id: number) => {
         try {

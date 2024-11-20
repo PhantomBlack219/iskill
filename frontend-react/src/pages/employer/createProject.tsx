@@ -3,6 +3,7 @@ import Sidebar from '../../components/sidebar';
 import Navbar from '../../components/navbar';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import AdminSidebar from '../../components/adminSidebar';
 
 const CreateProyect = () => {
     const location = useLocation();
@@ -31,6 +32,14 @@ const CreateProyect = () => {
             ...project,
             [e.target.name]: e.target.value
         });
+    }
+
+    const onCancelButtonPressed = () => {
+        if(usuarioJSON.tipo_usuario_id.tipo_usuario_id === 1) {
+            navigate('/admin/all-projects');
+        } else {
+            navigate('/employer/my-projects');
+        }
     }
 
     const saveProject = async (e: FormEvent<HTMLFormElement>) => {
@@ -81,7 +90,7 @@ const CreateProyect = () => {
                                 text: 'El proyecto se ha guardado correctamente.',
                                 confirmButtonColor: '#00667F'
                             }).then(() => {
-                                navigate('/employer/my-projects');
+                                onCancelButtonPressed();
                             });
                         }
                     } catch (error) {
@@ -100,7 +109,11 @@ const CreateProyect = () => {
     return (
         <div className='wrapper'>
             <Navbar></Navbar>
-            <Sidebar></Sidebar>
+            {usuarioJSON.tipo_usuario_id.tipo_usuario_id === 1 ? (
+                <AdminSidebar />
+            ) : (
+                <Sidebar />
+            )}
             <div className='content-wrapper'>
                 <div className="main-content">
                     <div className="gap-div justify-content-center">
@@ -122,7 +135,7 @@ const CreateProyect = () => {
 
                                         <div className="d-flex justify-content-center gap-3 mt-4">
                                             <button className="btn btn-primary btn-custom" type='submit'>Guardar</button>
-                                            <Link to={"/employer/my-projects"} type="button" className="btn btn-danger">Cancelar</Link>
+                                            <button className="btn btn-danger" onClick={onCancelButtonPressed}>Cancelar</button>
                                         </div>
                                     </form>
                                 </div>
