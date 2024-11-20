@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -72,6 +73,32 @@ public class PostulacionController {
     public ResponseEntity<Postulacion> updatePostulacion(@RequestBody Postulacion Postulacion) {
         return PostulacionService.findById(Postulacion.getPostulacion_id())
             .map(tu -> ResponseEntity.ok(PostulacionService.update(Postulacion)))
+            .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+
+        /**
+     * Actualiza solo un campo específico de la postulación, en este caso el estado.
+     * 
+     * @param id el id de la postulación
+     * @param estado el nuevo estado de la postulación
+     * @return la postulación actualizada
+     */
+    @PatchMapping("/{id}")
+    @SecurityRequirement(name = "bearerAuth")
+    public ResponseEntity<Postulacion> updatePostulacionEstado(@PathVariable Long id, @RequestBody EstadoPostulacion estado) {
+        // Buscar la postulación por id
+        return PostulacionService.findById(id)
+            .map(postulacion -> {
+                // Cambiar solo el campo del estado
+                postulacion.setEstado(estado);
+
+                // Guardar la postulación actualizada
+                Postulacion updatedPostulacion = PostulacionService.update(postulacion);
+                
+                // Retornar la respuesta
+                return ResponseEntity.ok(updatedPostulacion);
+            })
             .orElseGet(() -> ResponseEntity.notFound().build());
     }
 

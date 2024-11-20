@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../../components/navbar';
-import Sidebar from '../../components/sidebar';
+import Sidebar from '../../components/sidebarEmployee';
 import { Link, useNavigate } from 'react-router-dom';
 import { jwtDecode, JwtPayload } from 'jwt-decode';
 import Swal from 'sweetalert2';
@@ -62,10 +62,11 @@ const ListVacancies = () => {
     const decodedToken = token ? jwtDecode<JwtPayload>(token) : null;
 
     const usuario = localStorage.getItem('usuario');
+
     const usuarioJSON = usuario ? JSON.parse(usuario) : null;
 
     useEffect(() => {
-        document.title = 'Mis Vacantes | iSkill';
+        document.title = 'Mis Aplicaciones | iSkill';
         if (decodedToken !== null) {
             let currentDate = new Date();
             if (decodedToken.exp && decodedToken.exp * 1000 < currentDate.getTime()) {
@@ -287,7 +288,6 @@ const ListVacancies = () => {
                                         <div style={{ display: 'flex', justifyContent: 'center' }} className="card-actions">
                                             <button className="btn btn-primary btn-custom" onClick={() => editVacante(vacante)}>Editar</button>
                                             <button className="btn btn-danger" onClick={() => deleteVacante(vacante.vacante_id)}>Eliminar</button>
-                                            <button className="btn btn-info" onClick={() => navigate(`/employer/applications/${vacante.vacante_id}`)}>Ver postulaciones</button>
                                         </div>
                                     </div>
                                 </div>
@@ -295,6 +295,7 @@ const ListVacancies = () => {
                         }
                     </div>
                 </div>
+
             </div>
         </div>
     );
